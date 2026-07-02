@@ -2,11 +2,11 @@ const axios = require('axios');
 const { FUTURES_API_VERSION } = require('../utils/constants');
 const { getFuturesUrl, getAuthHeaders } = require('../utils/common');
 
-const getWalletBalance = async () => {
-  const endpoint = `/api/${FUTURES_API_VERSION}/user/wallet`;
+const queryAccountFees = async (params) => {
+  const endpoint = `/api/${FUTURES_API_VERSION}/user/fees`;
   try {
     const res = await axios.get(getFuturesUrl(endpoint), {
-      params: { wallet: 'CROSS@' },
+      params,
       headers: getAuthHeaders(endpoint),
     });
     return res.data;
@@ -15,4 +15,8 @@ const getWalletBalance = async () => {
   }
 };
 
-getWalletBalance().then(console.log).catch(console.error);
+queryAccountFees({
+  symbol: 'BTC-PERP',
+})
+  .then(console.log)
+  .catch(console.error);

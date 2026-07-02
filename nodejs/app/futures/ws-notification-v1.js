@@ -25,7 +25,7 @@ client.onopen = () => {
       // subscribe to notification api websocket
       const payload = {
         op: 'subscribe',
-        args: ['notificationApiV1'],
+        args: ['notificationApiV3'],
       };
       console.log('sending msg: ' + JSON.stringify(payload));
       client.send(JSON.stringify(payload));

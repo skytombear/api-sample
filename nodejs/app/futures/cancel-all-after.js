@@ -2,12 +2,9 @@ const axios = require('axios');
 const { FUTURES_API_VERSION } = require('../utils/constants');
 const { getFuturesUrl, getAuthHeaders } = require('../utils/common');
 
-const changeSettlementCurrency = async ({ symbol, currency }) => {
-  const endpoint = `/api/${FUTURES_API_VERSION}/settle_in`;
-  const body = {
-    symbol,
-    currency,
-  };
+// Dead man's switch: cancel all orders after `timeout` ms. Send timeout=0 to disable.
+const cancelAllAfter = async (body) => {
+  const endpoint = `/api/${FUTURES_API_VERSION}/order/cancelAllAfter`;
   try {
     const res = await axios.post(getFuturesUrl(endpoint), body, {
       headers: getAuthHeaders(endpoint, body),
@@ -18,9 +15,8 @@ const changeSettlementCurrency = async ({ symbol, currency }) => {
   }
 };
 
-changeSettlementCurrency({
-  symbol: 'ETH-PERP',
-  currency: 'ETH',
+cancelAllAfter({
+  timeout: 60000,
 })
   .then(console.log)
   .catch(console.error);

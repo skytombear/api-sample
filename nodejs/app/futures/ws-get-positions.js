@@ -22,10 +22,11 @@ client.onopen = () => {
       console.log('sending auth msg: ' + JSON.stringify(authPayload));
       client.send(JSON.stringify(authPayload));
 
-      // subscribe to notification api websocket
+      // positionsV3 pushes an update whenever a position changes
+      // (a position reduced to 0 is pushed once with totalContracts = 0).
       const payload = {
         op: 'subscribe',
-        args: ['allPositionV4'],
+        args: ['positionsV3'],
       };
       console.log('sending msg: ' + JSON.stringify(payload));
       client.send(JSON.stringify(payload));

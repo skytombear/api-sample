@@ -17,7 +17,9 @@ client.onopen = () => {
         op: 'subscribe',
         args: [`snapshot:${market}_${grouping}`],
       };
-      console.log('subscribing snapshot orderbook to get the full orderbook for each update: ' + JSON.stringify(payload));
+      console.log(
+        'subscribing snapshot orderbook to get the full orderbook for each update: ' + JSON.stringify(payload)
+      );
       client.send(JSON.stringify(payload));
     }
   }
@@ -29,7 +31,6 @@ client.onclose = () => {
 };
 
 client.onmessage = (e) => {
-
   if (typeof e.data === 'string') {
     const now = Date.now();
     if (!lastTimestamp) {

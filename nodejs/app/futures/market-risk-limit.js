@@ -2,8 +2,10 @@ const axios = require('axios');
 const { FUTURES_API_VERSION } = require('../utils/constants');
 const { getFuturesUrl } = require('../utils/common');
 
-const getOhlcv = async (params) => {
-  const endpoint = `/api/${FUTURES_API_VERSION}/ohlcv`;
+// Public: default market risk-limit settings per market and risk level.
+// Omit `symbol` to retrieve all markets.
+const getMarketRiskLimit = async (params) => {
+  const endpoint = `/api/${FUTURES_API_VERSION}/market/risk_limit`;
   try {
     const res = await axios.get(getFuturesUrl(endpoint), {
       params,
@@ -14,9 +16,8 @@ const getOhlcv = async (params) => {
   }
 };
 
-getOhlcv({
+getMarketRiskLimit({
   symbol: 'BTC-PERP',
-  resolution: 15,
 })
   .then(console.log)
   .catch(console.error);

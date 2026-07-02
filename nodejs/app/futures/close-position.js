@@ -2,12 +2,8 @@ const axios = require('axios');
 const { FUTURES_API_VERSION } = require('../utils/constants');
 const { getFuturesUrl, getAuthHeaders } = require('../utils/common');
 
-const changeSettlementCurrency = async ({ symbol, currency }) => {
-  const endpoint = `/api/${FUTURES_API_VERSION}/settle_in`;
-  const body = {
-    symbol,
-    currency,
-  };
+const closePosition = async (body) => {
+  const endpoint = `/api/${FUTURES_API_VERSION}/order/close_position`;
   try {
     const res = await axios.post(getFuturesUrl(endpoint), body, {
       headers: getAuthHeaders(endpoint, body),
@@ -18,9 +14,12 @@ const changeSettlementCurrency = async ({ symbol, currency }) => {
   }
 };
 
-changeSettlementCurrency({
-  symbol: 'ETH-PERP',
-  currency: 'ETH',
+// type: MARKET (close at market) or LIMIT (price mandatory).
+// For HEDGE/ISOLATED positions, positionId is mandatory.
+closePosition({
+  symbol: 'BTC-PERP',
+  type: 'MARKET',
+  price: 0,
 })
   .then(console.log)
   .catch(console.error);

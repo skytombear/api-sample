@@ -1,23 +1,23 @@
 const axios = require('axios');
 const { FUTURES_API_VERSION } = require('../utils/constants');
-const { getFuturesUrl, getAuthHeaders } = require('../utils/common');
+const { getFuturesUrl } = require('../utils/common');
 
-const getTradeHistory = async (params) => {
-  const endpoint = `/api/${FUTURES_API_VERSION}/user/trade_history`;
+const getFundingHistory = async (params) => {
+  const endpoint = `/api/${FUTURES_API_VERSION}/funding_history`;
   try {
     const res = await axios.get(getFuturesUrl(endpoint), {
       params,
-      headers: getAuthHeaders(endpoint),
     });
     return res.data;
   } catch (error) {
-    console.log(error);
-    return error.response.data;
+    return error;
   }
 };
 
-getTradeHistory({
+// `count` is mutually exclusive with `from`/`to`.
+getFundingHistory({
   symbol: 'BTC-PERP',
+  count: 10,
 })
   .then(console.log)
   .catch(console.error);

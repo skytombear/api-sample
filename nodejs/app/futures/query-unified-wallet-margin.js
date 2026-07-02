@@ -2,11 +2,12 @@ const axios = require('axios');
 const { FUTURES_API_VERSION } = require('../utils/constants');
 const { getFuturesUrl, getAuthHeaders } = require('../utils/common');
 
-const getWalletBalance = async () => {
-  const endpoint = `/api/${FUTURES_API_VERSION}/user/wallet`;
+// For users who have upgraded to the unified wallet.
+const queryUnifiedWalletMargin = async (params) => {
+  const endpoint = `/api/${FUTURES_API_VERSION}/user/unifiedWallet/margin`;
   try {
     const res = await axios.get(getFuturesUrl(endpoint), {
-      params: { wallet: 'CROSS@' },
+      params,
       headers: getAuthHeaders(endpoint),
     });
     return res.data;
@@ -15,4 +16,8 @@ const getWalletBalance = async () => {
   }
 };
 
-getWalletBalance().then(console.log).catch(console.error);
+queryUnifiedWalletMargin({
+  symbol: 'BTC-PERP',
+})
+  .then(console.log)
+  .catch(console.error);

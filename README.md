@@ -12,6 +12,15 @@ Sample connectors for connecting to the BTSE API.
 
 ## Change Log
 
+* 2026-07-01
+  - Update Futures **Python** samples to API v2.3.
+    - Bump futures API version `v2.1` -> `v2.3`; update market symbols to the `BTC-PERP` format.
+    - Fix existing samples: orderbook L2 path (`/orderbook/L2`), risk limit field (`riskLimitLevel`), account fees request, wallet transfer path (`/user/wallet/transfer`), OCO order, charting `resolution`, trades `includeOld`.
+    - Update websocket topics (`notificationApiV4`, `allPositionV4`, `fillsV2`, `tradeHistoryApiV3`, `snapshotL1`).
+    - Add new endpoint samples: Query Order, Get Risk Limit, Get Leverage, Bind TP/SL, Query/Change Position Mode, Query Margin, Funding History, Market Risk Limit Setting, Query Unified Wallet Margin, Sub-account Wallet Transfer, and the `positionsV3` websocket.
+  - Update Futures **Node.js** samples to API v2.3 (same scope as Python: version bump, BTC-PERP symbols, bug fixes, websocket topics, and new endpoint samples incl. the positionsV3 websocket).
+  - Update dependency versions to current stable (Python 3.13, Node.js 24 LTS, .NET 10) and migrate the Node.js ESLint config to flat config.
+
 * 2023-10-05
   - Add .NET6 sample code.
 
@@ -77,7 +86,7 @@ Sample connectors for connecting to the BTSE API.
 
   * API version
     - Spot: v3.2
-    - Futures: v2.1
+    - Futures: v2.3
     - Otc: v1
 
 
@@ -92,7 +101,7 @@ Sample connectors for connecting to the BTSE API.
   * How to play with python examples without docker
     1. Run `cp config/.env.example python/.env` and fill-in needed data in `.env`
     1. Set `python` as your current working directory
-    1. install Python (version > 3)
+    1. install Python (version >= 3.13)
     1. install package by poetry
     1. `python run {{EXAMPLE_FILE}}` to run the example, for example: `python api/spot_get_wallet_balance.py`
 
@@ -108,7 +117,7 @@ Sample connectors for connecting to the BTSE API.
   * How to play with node examples without docker
     1. Run `cp config/.env.example nodejs/.env` and fill-in needed data in `.env`
     1. Set `nodejs` as your current working directory
-    1. install Nodejs (version > 16)
+    1. install Nodejs (version >= 20, LTS 24 recommended)
     1. `npm install` to install required packages
     1. `node {{EXAMPLE_FILE}}` to run the example, for example: `node app/spot/query-market-summary.js`
 
@@ -116,7 +125,7 @@ Sample connectors for connecting to the BTSE API.
 
   * How to play with C# examples without docker
     1. Run `cp config/.env.example CSharp/BTSEApiSample/BTSEApiSample/.env` and fill-in needed data in `.env`
-    1. Install .NET6 SDK. You can find download link [here](https://dotnet.microsoft.com/en-us/download/dotnet/6.0).
+    1. Install .NET10 SDK. You can find download link [here](https://dotnet.microsoft.com/en-us/download/dotnet/10.0).
     1. Open `CSharp/BTSEApiSample/BTSEApiSample.sln` with Visual Studio.
     1. Run the project you want to test with Visual Studio.
 
@@ -135,52 +144,65 @@ Sample connectors for connecting to the BTSE API.
 
 ## Futures
 ### Public Endpoints
-|Document Name |Python | 
-| :--------   | :--------   | 
-|Market Summary |futures_get_market_summary.py | 
-|Charting Data |futures_charting_data.py | 
-|Query Market price | futures_query_market_price.py | 
-|Orderbook (By grouping) |futures_get_orderbook.py | 
-|Orderbook |futures_get_orderbook_L2.py | 
-|Query Trades Fills |futures_get_trades.py | 
+|Document Name |Python |Node.js |
+| :--------   | :--------   | :--------   |
+|Market Summary |futures_get_market_summary.py |market-summary.js |
+|Charting Data |futures_charting_data.py |charting-data.js |
+|Query Market price | futures_query_market_price.py |query-market-price.js |
+|Orderbook (By grouping) |futures_get_orderbook.py |orderbook-grouping.js |
+|Orderbook |futures_get_orderbook_L2.py |orderbook-L2.js |
+|Query Trades Fills |futures_get_trades.py |query-trade-fills.js |
+|Funding History |futures_get_funding_history.py |funding-history.js |
+|Market Risk Limit Setting |futures_get_market_risk_limit.py |market-risk-limit.js |
 
 ### Trade Endpoints
-|Document Name |Python | 
-| :--------   | :--------   | 
-|Create new order |futures_place_limit_order.py | 
-|Create new algo order|futures_create_new_algo_order.py|
-|Amend Order |futures_amend_order.py |
-|Cancel Order |futures_cancel_order.py | 
-|Dead man's switch (Cancel all after)|futures_cancel_all_after.py|
-|Query Open Orders |futures_get_open_orders.py |
-|Query Trades Fills|futures_query_trades_fills.py|
+|Document Name |Python |Node.js |
+| :--------   | :--------   | :--------   |
+|Create new order |futures_place_limit_order.py |create-limit-order.js |
+|Create new algo order|futures_create_new_algo_order.py|create-algo-order.js|
+|Amend Order |futures_amend_order.py |amend-order.js |
+|Cancel Order |futures_cancel_order.py |cancel-order.js |
+|Query Order |futures_query_order.py |query-order.js |
+|Dead man's switch (Cancel all after)|futures_cancel_all_after.py|cancel-all-after.js|
+|Query Open Orders |futures_get_open_orders.py |query-open-orders.js |
+|Query Trades Fills|futures_query_trades_fills.py|query-trade-history.js|
 |Query Position|futures_query_position.py|query-positions.js|
-|Close Position|futures_close_position.py|
-|Set Risk Limits|futures_set_risk_limits.py|
-|Set Leverage|futures_set_leverage.py|
-|Change contract settlement currency|futures_change_settlement_currency.py | 
-|Query Account Fees|futures_query_account_fees.py|
+|Close Position|futures_close_position.py|close-position.js|
+|Get Risk Limit|futures_get_risk_limit.py|get-risk-limit.js|
+|Set Risk Limit|futures_set_risk_limits.py|set-risk-limit.js|
+|Set Leverage|futures_set_leverage.py|set-leverage.js|
+|Get Leverage|futures_get_leverage.py|get-leverage.js|
+|Change contract settlement currency|futures_change_settlement_currency.py |change-settlement-currency.js |
+|Query Account Fees|futures_query_account_fees.py|query-account-fees.js|
+|Bind TP/SL|futures_bind_tp_sl.py|bind-tp-sl.js|
+|Query Position Mode|futures_query_position_mode.py|query-position-mode.js|
+|Change Position Mode|futures_change_position_mode.py|change-position-mode.js|
+|Query Margin Percentage|futures_query_margin_setting.py|query-margin-setting.js|
 
 ### Wallet Endpoints
-|Document Name |Python | 
-| :--------   | :--------   | 
-|Query Wallet Balance|futures_query_wallet_balance.py|
-|Query Wallet History | futures_query_wallet_history.py | 
-|Query Wallet Margin|futures_query_wallet_margin.py|
-|Transfer funds between Futures wallet|futures_transfer_funds_between_futures_wallet.py|
+|Document Name |Python |Node.js |
+| :--------   | :--------   | :--------   |
+|Query Wallet Balance|futures_query_wallet_balance.py|query-wallet-balance.js|
+|Query Wallet History | futures_query_wallet_history.py |query-wallet-history.js |
+|Query Wallet Margin|futures_query_wallet_margin.py|query-wallet-margin.js|
+|Query Unified Wallet Margin|futures_query_unified_wallet_margin.py|query-unified-wallet-margin.js|
+|Transfer funds between Futures wallet|futures_transfer_funds_between_futures_wallet.py|-|
+|Sub-account Wallet Transfer|futures_subaccount_wallet_transfer.py|subaccount-wallet-transfer.js|
 
 ### Websocket Streams
-|Document Name |Python |
-| :--------   | :--------   |
-|Subscription|futures_ws_subscription.py |
-|Orderbook Snapshot (By grouping)|futures_ws_get_orderbook_group.py |
-|Orderbook Snapshot (By depth)|futures_ws_get_orderbook_depth.py|
-|Orderbook Incremental Updates|futures_ws_get_oss_delta.py|
-|Public Trade Fills|futures_ws_public_trade_fills.py|
-|Authentication|futures_ws_authentication.py|
-|Notifications|futures_ws_notifcations.py|
-|User Trade Fills|futures_ws_user_trade_fillls.py|
-|All Position|futures_ws_get_all_position.py|
+|Document Name |Python |Node.js |
+| :--------   | :--------   | :--------   |
+|Subscription|futures_ws_subscription.py |-|
+|Orderbook Snapshot (By grouping)|futures_ws_get_orderbook_group.py |-|
+|Orderbook Snapshot (By depth)|futures_ws_get_orderbook_depth.py|-|
+|Orderbook Incremental Updates|futures_ws_get_oss_delta.py|ws-get-orderbook-delta.js|
+|Orderbook BBO Snapshot (snapshotL1)|futures_ws_get_oss_snapshot.py|-|
+|Public Trade Fills|futures_ws_public_trade_fills.py|ws-public-trades.js|
+|Authentication|futures_ws_authentication.py|-|
+|Notifications|futures_ws_notifcations.py|ws-notification-v2.js|
+|User Trade Fills|futures_ws_user_trade_fillls.py|-|
+|All Position|futures_ws_get_all_position.py|ws-get-all-position.js|
+|Positions|futures_ws_get_positions.py|ws-get-positions.js|
 
 ## OTC
 ### OTC Endpoints
