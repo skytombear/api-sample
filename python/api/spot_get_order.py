@@ -10,8 +10,8 @@ from utils import (
 )
 
 
-def spot_get_trade_history(params):
-    url = "/api/{0}/user/trade_history".format(get_spot_api_version())
+def spot_get_order(params):
+    url = "/api/{0}/order".format(get_spot_api_version())
     env = get_env_info()
     headers = gen_headers(env["API_KEY"], env["API_SECRET_KEY"], url)
     ret = {}
@@ -32,4 +32,5 @@ def spot_get_trade_history(params):
 
 
 if __name__ == "__main__":
-    print(spot_get_trade_history({"symbol": "BTC-USD"}))
+    # Query a single order by orderID (or use clOrderID). One is mandatory.
+    print(spot_get_order({"orderID": "your-order-id"}))

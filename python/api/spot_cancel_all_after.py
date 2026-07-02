@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import json
 import requests
 from requests.exceptions import HTTPError
 from utils import (
@@ -10,15 +11,18 @@ from utils import (
 )
 
 
-def spot_get_trade_history(params):
-    url = "/api/{0}/user/trade_history".format(get_spot_api_version())
+# Dead man's switch: cancel all orders after `timeout` ms. Send timeout=0 to disable.
+def spot_cancel_all_after(data):
+    url = "/api/{0}/order/cancelAllAfter".format(get_spot_api_version())
     env = get_env_info()
-    headers = gen_headers(env["API_KEY"], env["API_SECRET_KEY"], url)
+    headers = gen_headers(
+        env["API_KEY"], env["API_SECRET_KEY"], url, json.dumps(data)
+    )
     ret = {}
     try:
-        resp = requests.get(
+        resp = requests.post(
             get_spot_full_url(env["API_HOST"], url),
-            params=params,
+            json=data,
             headers=headers,
         )
         resp.raise_for_status()
@@ -27,9 +31,9 @@ def spot_get_trade_history(params):
     except Exception as err:
         print("Other error occurred: {0}".format(err))
     finally:
-        ret = resp.json()
+        ret = resp
     return ret
 
 
 if __name__ == "__main__":
-    print(spot_get_trade_history({"symbol": "BTC-USD"}))
+    print(spot_cancel_all_after({"timeout": 60000}))

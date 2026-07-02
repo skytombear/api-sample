@@ -112,7 +112,7 @@ def on_open(ws):
         json.dumps(
             {
                 "op": "subscribe",
-                "args": ["notificationApiV2"],
+                "args": ["notificationApiV3"],
             }
         )
     )

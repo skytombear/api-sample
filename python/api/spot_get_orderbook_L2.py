@@ -6,7 +6,7 @@ from utils import get_env_info, get_spot_api_version, get_spot_full_url
 
 
 def spot_get_orderbook_L2(params):
-    url = "/api/{0}/orderbook".format(get_spot_api_version())
+    url = "/api/{0}/orderbook/L2".format(get_spot_api_version())
     env = get_env_info()
     ret = {}
     try:
