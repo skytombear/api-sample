@@ -12,6 +12,14 @@ Sample connectors for connecting to the BTSE API.
 
 ## Change Log
 
+* 2026-07-02
+  - Update **Spot** samples to API v3.3 across Python / Node.js / C#.
+    - Bump spot API version `v3.2` -> `v3.3` (symbols already `BTC-USD`).
+    - Fix bugs: Python orderbook L2 path (`/orderbook/L2`) & drop bogus `includeOld`; Node `amend-order` `slide` field & `tradeHistory`->`tradeHistoryApi` topic; C# `SpotQueryMarketPrice` wrongly using the futures version/host.
+    - Update websocket topics: `notificationApiV2/V1` -> `notificationApiV3`, `snapshot` -> `snapshotL1` (drop grouping); mark removed `orderBookApi` topic deprecated.
+    - Update C# make/cancel response entities to the v3.3 base/quote fields (`originalOrderBaseSize`/`QuoteSize`, `currentOrderBaseSize`/`QuoteSize`, `remainingOrderBaseSize`/`QuoteSize`, `filledBaseSize`, `totalFilledBaseSize`, `orderCurrency`).
+    - Add missing samples for full three-language parity: single Query Order, and a C# project per remaining spot endpoint (Public / Trade / Investment / Websocket).
+
 * 2026-07-01
   - Update Futures **Python** samples to API v2.3.
     - Bump futures API version `v2.1` -> `v2.3`; update market symbols to the `BTC-PERP` format.
@@ -86,7 +94,7 @@ Sample connectors for connecting to the BTSE API.
 ## Examples
 
   * API version
-    - Spot: v3.2
+    - Spot: v3.3
     - Futures: v2.3
     - Otc: v1
 
@@ -204,6 +212,53 @@ Sample connectors for connecting to the BTSE API.
 |User Trade Fills|futures_ws_user_trade_fillls.py|-|FutureWsUserTradeFillsProject|
 |All Position|futures_ws_get_all_position.py|ws-get-all-position.js|FutureWsAllPositionProject|
 |Positions|futures_ws_get_positions.py|ws-get-positions.js|FutureWsPositionsProject|
+
+## Spot
+### Public Endpoints
+|Document Name |Python |Node.js |C# (project) |
+| :--------   | :--------   | :--------   | :--------   |
+|Market Summary|spot_get_market_summary.py|query-market-summary.js|SpotMarketSummaryProject|
+|Charting Data|spot_get_ohlcv.py|charting-data.js|SpotChartingDataProject|
+|Query Market Price|spot_get_price.py|query-market-price.js|SpotQueryMarketPriceProject|
+|Orderbook (By grouping)|spot_get_orderbook.py|orderbook-grouping.js|SpotOrderbookProject|
+|Orderbook|spot_get_orderbook_L2.py|orderbook-L2.js|SpotOrderbookL2Project|
+|Query Trades Fills|spot_get_trades.py|query-trade-fills.js|SpotQueryTradesProject|
+|Query Server Time|spot_get_time.py|query-server-time.js|SpotQueryServerTimeProject|
+
+### Trade Endpoints
+|Document Name |Python |Node.js |C# (project) |
+| :--------   | :--------   | :--------   | :--------   |
+|Create New Order|spot_post_place_order.py|create-limit-order.js|SpotMakeOrderProject|
+|Create New Algo Order|spot_post_place_order.py|create-peg-order.js|SpotCreateAlgoOrderProject|
+|Query Order|spot_get_order.py|query-order.js|SpotQueryOrderProject|
+|Amend Order|spot_amend_order.py|amend-order.js|SpotAmendOrderProject|
+|Cancel Order|spot_cancel_multiple_orders.py|cancel-order.js|SpotCancelOrderProject|
+|Dead man's switch (Cancel all after)|spot_cancel_all_after.py|cancel-all-orders.js|SpotCancelAllAfterProject|
+|Query Open Orders|spot_get_open_orders.py|query-open-orders.js|SpotQueryOpenOrdersProject|
+|Query User Trades Fills|spot_get_trade_history.py|query-trade-history.js|SpotQueryTradeHistoryProject|
+|Query Account Fees|spot_get_user_fees.py|query-account-fees.js|SpotQueryAccountFeesProject|
+
+### Investment Endpoints
+|Document Name |Python |Node.js |C# (project) |
+| :--------   | :--------   | :--------   | :--------   |
+|Query Investment Products|spot_get_invest_products.py|earn/query-investment-products.js|SpotInvestProductsProject|
+|Deposit Investment|spot_post_invest_deposit.py|earn/deposit-investment.js|SpotInvestDepositProject|
+|Renew Investment|spot_post_invest_renew.py|earn/renew-investment.js|SpotInvestRenewProject|
+|Redeem Investment|spot_post_invest_redeem.py|earn/investment-redeem.js|SpotInvestRedeemProject|
+|Query Investment Orders|spot_get_invest_orders.py|earn/investment-orders.js|SpotInvestOrdersProject|
+|Query Investment History|spot_get_invest_history.py|earn/investment-history.js|SpotInvestHistoryProject|
+
+### Websocket Streams
+|Document Name |Python |Node.js |C# (project) |
+| :--------   | :--------   | :--------   | :--------   |
+|Ping/Pong|spot_ws_ping_pong.py|ws-ping-pong.js|SpotWsPingPongProject|
+|Subscription|-|-|SpotWsSubscriptionProject|
+|Public Trade Fills|spot_ws_public_trade_fills.py|ws-trade-history.js|SpotWsPublicTradeFillsProject|
+|Authentication|-|-|SpotWsAuthenticationProject|
+|Notifications|spot_ws_notification_v2_create_limit_order.py|ws-notification-v2.js|SpotWsNotificationsProject|
+|User Trade Fills|spot_ws_trade_fills.py|ws-user-fills.js|SpotWsUserTradeFillsProject|
+|OSS BBO Snapshot (snapshotL1)|spot_ws_get_oss_snapshot.py|ws-oss-snapshot.js|SpotWsOrderbookSnapshotProject|
+|OSS Incremental Updates (update)|spot_ws_get_oss_delta.py|ws-oss-delta.js|SpotWsOrderbookDeltaProject|
 
 ## OTC
 ### OTC Endpoints
