@@ -13,6 +13,10 @@ spotClient.onerror = () => {
 spotClient.onopen = () => {
   function subscribe() {
     if (spotClient.readyState === spotClient.OPEN) {
+      // DEPRECATED (V3.3): the `orderBookApi` websocket topic has been removed.
+      // Grouped orderbook is now REST-only (GET /api/v3.3/orderbook). For realtime
+      // updates use the OSS streams instead: `update:<symbol>_<grouping>` (ws-oss-delta.js)
+      // or `snapshotL1:<symbol>` (ws-oss-snapshot.js).
       const payload = {
         op: 'subscribe',
         args: [`orderBookApi:${market}_0`],

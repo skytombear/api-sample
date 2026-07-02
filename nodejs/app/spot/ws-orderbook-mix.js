@@ -167,6 +167,8 @@ spotClient.onerror = () => {
 spotClient.onopen = () => {
   function subscribe() {
     if (spotClient.readyState === spotClient.OPEN) {
+      // DEPRECATED (V3.3): the `orderBookApi` websocket topic has been removed;
+      // use the OSS streams (`update:`/`snapshotL1:`) instead. Kept for reference.
       const payload = {
         op: 'subscribe',
         args: [`orderBookApi:${market}_0`],

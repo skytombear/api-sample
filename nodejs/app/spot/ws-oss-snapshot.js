@@ -3,7 +3,6 @@ const { getWsOssSpotUrl } = require('../utils/common');
 
 const client = new webSocket(getWsOssSpotUrl());
 const market = 'BTC-USD';
-const grouping = 1;
 let lastTimestamp = 0;
 
 client.onerror = () => {
@@ -15,7 +14,7 @@ client.onopen = () => {
     if (client.readyState === client.OPEN) {
       const payload = {
         op: 'subscribe',
-        args: [`snapshot:${market}_${grouping}`],
+        args: [`snapshotL1:${market}`],
       };
       console.log(
         'subscribing snapshot orderbook to get the full orderbook for each update: ' + JSON.stringify(payload)
