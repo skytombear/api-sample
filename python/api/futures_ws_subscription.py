@@ -22,7 +22,7 @@ def on_close(ws, close_status_code, close_msg):
 def on_open(ws):
     payload = {
         "op": "subscribe",
-        "args": ["orderBookApi:BTCPFC_0"],
+        "args": ["tradeHistoryApiV3:BTC-PERP"],
     }
     ws.send(json.dumps(payload))
 

@@ -38,7 +38,7 @@ def on_open(ws):
     }
     ws.send(json.dumps(payload))
 
-    payload = {"op": "subscribe", "args": ["notificationApiV2"]}
+    payload = {"op": "subscribe", "args": ["notificationApiV4"]}
     ws.send(json.dumps(payload))
 
 

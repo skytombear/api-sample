@@ -11,8 +11,10 @@ from utils import (
 )
 
 
-def placeReduceOnlyOrder(data):
-    url = "/api/{0}/order".format(get_futures_api_version())
+# Transfer funds between sub-accounts. Requires `fromUser` and `receiver`
+# usernames in addition to the source/destination wallet types.
+def futures_subaccount_wallet_transfer(data):
+    url = "/api/{0}/subaccount/wallet/transfer".format(get_futures_api_version())
     env = get_env_info()
     headers = gen_headers(
         env["API_KEY"], env["API_SECRET_KEY"], url, json.dumps(data)
@@ -36,10 +38,12 @@ def placeReduceOnlyOrder(data):
 
 if __name__ == "__main__":
     data = {
-        "size": 1,
-        "price": 20000,
-        "side": "SELL",
-        "symbol": "BTC-PERP",
-        "type": "LIMIT",
+        "walletSrcType": "CROSS",
+        "walletDestType": "CROSS",
+        "fromUser": "source-username",
+        "receiver": "receiver-username",
+        "apiWallets": [
+            {"currency": "USDT", "allBalance": True},
+        ],
     }
-    print(placeReduceOnlyOrder(data))
+    print(futures_subaccount_wallet_transfer(data))

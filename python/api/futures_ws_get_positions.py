@@ -2,7 +2,7 @@
 
 import websocket
 import json
-from utils import get_env_info, get_futures_ws_url
+from utils import get_env_info, get_futures_ws_url, gen_headers
 
 order_counts = {}
 
@@ -20,13 +20,25 @@ def on_close(ws, close_status_code, close_msg):
 
 
 def on_open(ws):
-    # DEPRECATED (V2.3): the `orderBookApi` websocket topic has been removed.
-    # Grouped orderbook is now REST-only (GET /api/v2.3/orderbook). For realtime
-    # updates use the OSS streams instead: `update:<symbol>_<grouping>` (see
-    # futures_ws_get_oss_delta.py) or `snapshotL1:<symbol>` (futures_ws_get_oss_snapshot.py).
+    # auth is mandatory in order to get your own positions
+    url = "/ws/futures"
+    headers = gen_headers(env["API_KEY"], env["API_SECRET_KEY"], url)
+
+    payload = {
+        "op": "authKeyExpires",
+        "args": [
+            headers["request-api"],
+            headers["request-nonce"],
+            headers["request-sign"],
+        ],
+    }
+    ws.send(json.dumps(payload))
+
+    # positionsV3 pushes an update whenever a position changes (a position
+    # reduced to 0 is pushed once with totalContracts = 0).
     payload = {
         "op": "subscribe",
-        "args": ["orderBookApi:BTC-PERP_0"],
+        "args": ["positionsV3"],
     }
     ws.send(json.dumps(payload))
 

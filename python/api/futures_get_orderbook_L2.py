@@ -6,7 +6,7 @@ from utils import get_env_info, get_futures_api_version, get_futures_full_url
 
 
 def futures_get_orderbook_L2(params):
-    url = "/api/{0}/orderbook".format(get_futures_api_version())
+    url = "/api/{0}/orderbook/L2".format(get_futures_api_version())
     env = get_env_info()
     ret = {}
     try:
@@ -27,7 +27,7 @@ if __name__ == "__main__":
     print(
         futures_get_orderbook_L2(
             {
-                "symbol": "BTCPFC",
+                "symbol": "BTC-PERP",
                 "depth": 10,
             }
         )

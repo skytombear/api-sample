@@ -5,8 +5,10 @@ from requests.exceptions import HTTPError
 from utils import get_env_info, get_futures_api_version, get_futures_full_url
 
 
-def query_market_price(params):
-    url = "/api/{0}/price".format(get_futures_api_version())
+# Public: default market risk limit settings (initial/maintenance margin and max
+# leverage per market and per risk level). Omit `symbol` to retrieve all markets.
+def futures_get_market_risk_limit(params):
+    url = "/api/{0}/market/risk_limit".format(get_futures_api_version())
     env = get_env_info()
     ret = {}
     try:
@@ -24,5 +26,4 @@ def query_market_price(params):
 
 
 if __name__ == "__main__":
-    data = {"symbol": "BTC-PERP"}
-    print(query_market_price(data))
+    print(futures_get_market_risk_limit({"symbol": "BTC-PERP"}))

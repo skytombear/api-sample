@@ -10,7 +10,7 @@ from utils import (
 )
 
 
-def earn_get_ohlcv(data):
+def futures_charting_data(data):
     url = "/api/{0}/ohlcv".format(get_futures_api_version())
     env = get_env_info()
     headers = gen_headers(env["API_KEY"], env["API_SECRET_KEY"], url)
@@ -36,6 +36,7 @@ def earn_get_ohlcv(data):
 
 if __name__ == "__main__":
     data = {
-        "symbol": "BTCPFC",
+        "symbol": "BTC-PERP",
+        "resolution": 60,
     }
-    print(earn_get_ohlcv(data))
+    print(futures_charting_data(data))

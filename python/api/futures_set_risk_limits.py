@@ -35,5 +35,5 @@ def funct(data):
 
 
 if __name__ == "__main__":
-    data = {"symbol": "BTCPFC", "riskLimit": 0}
+    data = {"symbol": "BTC-PERP", "riskLimitLevel": 2}
     print(funct(data))

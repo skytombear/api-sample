@@ -5,8 +5,8 @@ from requests.exceptions import HTTPError
 from utils import get_env_info, get_futures_api_version, get_futures_full_url
 
 
-def query_market_price(params):
-    url = "/api/{0}/price".format(get_futures_api_version())
+def futures_get_funding_history(params):
+    url = "/api/{0}/funding_history".format(get_futures_api_version())
     env = get_env_info()
     ret = {}
     try:
@@ -24,5 +24,5 @@ def query_market_price(params):
 
 
 if __name__ == "__main__":
-    data = {"symbol": "BTC-PERP"}
-    print(query_market_price(data))
+    # `count` is mutually exclusive with `from`/`to`.
+    print(futures_get_funding_history({"symbol": "BTC-PERP", "count": 10}))

@@ -11,8 +11,8 @@ from utils import (
 )
 
 
-def placeReduceOnlyOrder(data):
-    url = "/api/{0}/order".format(get_futures_api_version())
+def futures_change_position_mode(data):
+    url = "/api/{0}/position_mode".format(get_futures_api_version())
     env = get_env_info()
     headers = gen_headers(
         env["API_KEY"], env["API_SECRET_KEY"], url, json.dumps(data)
@@ -35,11 +35,6 @@ def placeReduceOnlyOrder(data):
 
 
 if __name__ == "__main__":
-    data = {
-        "size": 1,
-        "price": 20000,
-        "side": "SELL",
-        "symbol": "BTC-PERP",
-        "type": "LIMIT",
-    }
-    print(placeReduceOnlyOrder(data))
+    # positionMode: ONE_WAY, HEDGE or ISOLATED
+    data = {"symbol": "BTC-PERP", "positionMode": "HEDGE"}
+    print(futures_change_position_mode(data))

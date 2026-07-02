@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import json
 import requests
 from requests.exceptions import HTTPError
 from utils import (
@@ -11,17 +10,15 @@ from utils import (
 )
 
 
-def placeReduceOnlyOrder(data):
-    url = "/api/{0}/order".format(get_futures_api_version())
+def futures_get_risk_limit(params):
+    url = "/api/{0}/risk_limit".format(get_futures_api_version())
     env = get_env_info()
-    headers = gen_headers(
-        env["API_KEY"], env["API_SECRET_KEY"], url, json.dumps(data)
-    )
+    headers = gen_headers(env["API_KEY"], env["API_SECRET_KEY"], url)
     ret = {}
     try:
-        resp = requests.post(
+        resp = requests.get(
             get_futures_full_url(env["API_HOST"], url),
-            json=data,
+            params=params,
             headers=headers,
         )
         resp.raise_for_status()
@@ -35,11 +32,4 @@ def placeReduceOnlyOrder(data):
 
 
 if __name__ == "__main__":
-    data = {
-        "size": 1,
-        "price": 20000,
-        "side": "SELL",
-        "symbol": "BTC-PERP",
-        "type": "LIMIT",
-    }
-    print(placeReduceOnlyOrder(data))
+    print(futures_get_risk_limit({"symbol": "BTC-PERP"}))

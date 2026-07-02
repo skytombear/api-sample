@@ -12,7 +12,7 @@ from utils import (
 
 
 def funct(data):
-    url = "/api/{0}/wallet/transfer".format(get_futures_api_version())
+    url = "/api/{0}/user/wallet/transfer".format(get_futures_api_version())
     env = get_env_info()
     headers = gen_headers(
         env["API_KEY"], env["API_SECRET_KEY"], url, json.dumps(data)
@@ -41,8 +41,8 @@ if __name__ == "__main__":
         "walletDest": "string",
         "walletDestType": "CROSS",
         "apiWallets": [
-            {"currency": "USD", "allBalance": "true"},
-            {"currency": "BTC", "allBalance": "true"},
+            {"currency": "USD", "allBalance": True},
+            {"currency": "BTC", "allBalance": True},
         ],
     }
     print(funct(data))

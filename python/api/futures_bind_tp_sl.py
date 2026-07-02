@@ -11,8 +11,9 @@ from utils import (
 )
 
 
-def placeReduceOnlyOrder(data):
-    url = "/api/{0}/order".format(get_futures_api_version())
+# Bind take-profit / stop-loss to an existing position.
+def futures_bind_tp_sl(data):
+    url = "/api/{0}/order/bind/tpsl".format(get_futures_api_version())
     env = get_env_info()
     headers = gen_headers(
         env["API_KEY"], env["API_SECRET_KEY"], url, json.dumps(data)
@@ -35,11 +36,12 @@ def placeReduceOnlyOrder(data):
 
 
 if __name__ == "__main__":
+    # Set takeProfitPrice and/or stopLossPrice (at least one is required).
     data = {
-        "size": 1,
-        "price": 20000,
-        "side": "SELL",
         "symbol": "BTC-PERP",
-        "type": "LIMIT",
+        "takeProfitPrice": 31000,
+        "takeProfitTrigger": "markPrice",
+        "stopLossPrice": 22000,
+        "stopLossTrigger": "lastPrice",
     }
-    print(placeReduceOnlyOrder(data))
+    print(futures_bind_tp_sl(data))

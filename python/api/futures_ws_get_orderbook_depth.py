@@ -20,9 +20,13 @@ def on_close(ws, close_status_code, close_msg):
 
 
 def on_open(ws):
+    # DEPRECATED (V2.3): the `orderBookL2Api` websocket topic has been removed.
+    # L2 orderbook is now REST-only (GET /api/v2.3/orderbook/L2). For realtime
+    # updates use the OSS streams instead: `update:<symbol>_<grouping>` (see
+    # futures_ws_get_oss_delta.py) or `snapshotL1:<symbol>` (futures_ws_get_oss_snapshot.py).
     payload = {
         "op": "subscribe",
-        "args": ["orderBookL2Api:BTCPFC_0"],
+        "args": ["orderBookL2Api:BTC-PERP_0"],
     }
     ws.send(json.dumps(payload))
 
