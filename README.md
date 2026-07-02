@@ -19,6 +19,7 @@ Sample connectors for connecting to the BTSE API.
     - Update websocket topics (`notificationApiV4`, `allPositionV4`, `fillsV2`, `tradeHistoryApiV3`, `snapshotL1`).
     - Add new endpoint samples: Query Order, Get Risk Limit, Get Leverage, Bind TP/SL, Query/Change Position Mode, Query Margin, Funding History, Market Risk Limit Setting, Query Unified Wallet Margin, Sub-account Wallet Transfer, and the `positionsV3` websocket.
   - Update Futures **Node.js** samples to API v2.3 (same scope as Python: version bump, BTC-PERP symbols, bug fixes, websocket topics, and new endpoint samples incl. the positionsV3 websocket).
+  - Update Futures **C#** samples to API v2.3: bump `FuturesApiVersion` to v2.3, BTC-PERP symbols, fix the make/cancel response entities (originalOrderSize/currentOrderSize/filledSize/totalFilledSize, avgFilledPrice), and add a project per remaining endpoint (Public/Trade/Wallet/Websocket incl. positionsV3) so C# reaches full futures coverage.
   - Update dependency versions to current stable (Python 3.13, Node.js 24 LTS, .NET 10) and migrate the Node.js ESLint config to flat config.
 
 * 2023-10-05
@@ -144,65 +145,65 @@ Sample connectors for connecting to the BTSE API.
 
 ## Futures
 ### Public Endpoints
-|Document Name |Python |Node.js |
-| :--------   | :--------   | :--------   |
-|Market Summary |futures_get_market_summary.py |market-summary.js |
-|Charting Data |futures_charting_data.py |charting-data.js |
-|Query Market price | futures_query_market_price.py |query-market-price.js |
-|Orderbook (By grouping) |futures_get_orderbook.py |orderbook-grouping.js |
-|Orderbook |futures_get_orderbook_L2.py |orderbook-L2.js |
-|Query Trades Fills |futures_get_trades.py |query-trade-fills.js |
-|Funding History |futures_get_funding_history.py |funding-history.js |
-|Market Risk Limit Setting |futures_get_market_risk_limit.py |market-risk-limit.js |
+|Document Name |Python |Node.js |C# (project) |
+| :--------   | :--------   | :--------   | :--------   |
+|Market Summary |futures_get_market_summary.py |market-summary.js |FutureMarketSummaryProject |
+|Charting Data |futures_charting_data.py |charting-data.js |FutureChartingDataProject |
+|Query Market price | futures_query_market_price.py |query-market-price.js |FutureQueryMarketPriceProject |
+|Orderbook (By grouping) |futures_get_orderbook.py |orderbook-grouping.js |FutureOrderbookProject |
+|Orderbook |futures_get_orderbook_L2.py |orderbook-L2.js |FutureOrderbookL2Project |
+|Query Trades Fills |futures_get_trades.py |query-trade-fills.js |FutureQueryTradesProject |
+|Funding History |futures_get_funding_history.py |funding-history.js |FutureFundingHistoryProject |
+|Market Risk Limit Setting |futures_get_market_risk_limit.py |market-risk-limit.js |FutureMarketRiskLimitProject |
 
 ### Trade Endpoints
-|Document Name |Python |Node.js |
-| :--------   | :--------   | :--------   |
-|Create new order |futures_place_limit_order.py |create-limit-order.js |
-|Create new algo order|futures_create_new_algo_order.py|create-algo-order.js|
-|Amend Order |futures_amend_order.py |amend-order.js |
-|Cancel Order |futures_cancel_order.py |cancel-order.js |
-|Query Order |futures_query_order.py |query-order.js |
-|Dead man's switch (Cancel all after)|futures_cancel_all_after.py|cancel-all-after.js|
-|Query Open Orders |futures_get_open_orders.py |query-open-orders.js |
-|Query Trades Fills|futures_query_trades_fills.py|query-trade-history.js|
-|Query Position|futures_query_position.py|query-positions.js|
-|Close Position|futures_close_position.py|close-position.js|
-|Get Risk Limit|futures_get_risk_limit.py|get-risk-limit.js|
-|Set Risk Limit|futures_set_risk_limits.py|set-risk-limit.js|
-|Set Leverage|futures_set_leverage.py|set-leverage.js|
-|Get Leverage|futures_get_leverage.py|get-leverage.js|
-|Change contract settlement currency|futures_change_settlement_currency.py |change-settlement-currency.js |
-|Query Account Fees|futures_query_account_fees.py|query-account-fees.js|
-|Bind TP/SL|futures_bind_tp_sl.py|bind-tp-sl.js|
-|Query Position Mode|futures_query_position_mode.py|query-position-mode.js|
-|Change Position Mode|futures_change_position_mode.py|change-position-mode.js|
-|Query Margin Percentage|futures_query_margin_setting.py|query-margin-setting.js|
+|Document Name |Python |Node.js |C# (project) |
+| :--------   | :--------   | :--------   | :--------   |
+|Create new order |futures_place_limit_order.py |create-limit-order.js |FutureMakeOrderProject |
+|Create new algo order|futures_create_new_algo_order.py|create-algo-order.js|FutureCreateAlgoOrderProject|
+|Amend Order |futures_amend_order.py |amend-order.js |FutureAmendOrderProject |
+|Cancel Order |futures_cancel_order.py |cancel-order.js |FutureCancelOrderProject |
+|Query Order |futures_query_order.py |query-order.js |FutureQueryOrderProject |
+|Dead man's switch (Cancel all after)|futures_cancel_all_after.py|cancel-all-after.js|FutureCancelAllAfterProject|
+|Query Open Orders |futures_get_open_orders.py |query-open-orders.js |FutureQueryOpenOrdersProject |
+|Query Trades Fills|futures_query_trades_fills.py|query-trade-history.js|FutureQueryTradeHistoryProject|
+|Query Position|futures_query_position.py|query-positions.js|FutureQueryPositionProject|
+|Close Position|futures_close_position.py|close-position.js|FutureClosePositionProject|
+|Get Risk Limit|futures_get_risk_limit.py|get-risk-limit.js|FutureGetRiskLimitProject|
+|Set Risk Limit|futures_set_risk_limits.py|set-risk-limit.js|FutureSetRiskLimitProject|
+|Set Leverage|futures_set_leverage.py|set-leverage.js|FutureSetLeverageProject|
+|Get Leverage|futures_get_leverage.py|get-leverage.js|FutureGetLeverageProject|
+|Change contract settlement currency|futures_change_settlement_currency.py |change-settlement-currency.js |FutureChangeSettlementProject |
+|Query Account Fees|futures_query_account_fees.py|query-account-fees.js|FutureQueryAccountFeesProject|
+|Bind TP/SL|futures_bind_tp_sl.py|bind-tp-sl.js|FutureBindTpSlProject|
+|Query Position Mode|futures_query_position_mode.py|query-position-mode.js|FutureQueryPositionModeProject|
+|Change Position Mode|futures_change_position_mode.py|change-position-mode.js|FutureChangePositionModeProject|
+|Query Margin Percentage|futures_query_margin_setting.py|query-margin-setting.js|FutureQueryMarginSettingProject|
 
 ### Wallet Endpoints
-|Document Name |Python |Node.js |
-| :--------   | :--------   | :--------   |
-|Query Wallet Balance|futures_query_wallet_balance.py|query-wallet-balance.js|
-|Query Wallet History | futures_query_wallet_history.py |query-wallet-history.js |
-|Query Wallet Margin|futures_query_wallet_margin.py|query-wallet-margin.js|
-|Query Unified Wallet Margin|futures_query_unified_wallet_margin.py|query-unified-wallet-margin.js|
-|Transfer funds between Futures wallet|futures_transfer_funds_between_futures_wallet.py|-|
-|Sub-account Wallet Transfer|futures_subaccount_wallet_transfer.py|subaccount-wallet-transfer.js|
+|Document Name |Python |Node.js |C# (project) |
+| :--------   | :--------   | :--------   | :--------   |
+|Query Wallet Balance|futures_query_wallet_balance.py|query-wallet-balance.js|FutureQueryWalletBalanceProject|
+|Query Wallet History | futures_query_wallet_history.py |query-wallet-history.js |FutureQueryWalletHistoryProject |
+|Query Wallet Margin|futures_query_wallet_margin.py|query-wallet-margin.js|FutureQueryWalletMarginProject|
+|Query Unified Wallet Margin|futures_query_unified_wallet_margin.py|query-unified-wallet-margin.js|FutureQueryUnifiedWalletMarginProject|
+|Transfer funds between Futures wallet|futures_transfer_funds_between_futures_wallet.py|-|FutureTransferFundsProject|
+|Sub-account Wallet Transfer|futures_subaccount_wallet_transfer.py|subaccount-wallet-transfer.js|FutureSubAccountTransferProject|
 
 ### Websocket Streams
-|Document Name |Python |Node.js |
-| :--------   | :--------   | :--------   |
-|Subscription|futures_ws_subscription.py |-|
-|Orderbook Snapshot (By grouping)|futures_ws_get_orderbook_group.py |-|
-|Orderbook Snapshot (By depth)|futures_ws_get_orderbook_depth.py|-|
-|Orderbook Incremental Updates|futures_ws_get_oss_delta.py|ws-get-orderbook-delta.js|
-|Orderbook BBO Snapshot (snapshotL1)|futures_ws_get_oss_snapshot.py|-|
-|Public Trade Fills|futures_ws_public_trade_fills.py|ws-public-trades.js|
-|Authentication|futures_ws_authentication.py|-|
-|Notifications|futures_ws_notifcations.py|ws-notification-v2.js|
-|User Trade Fills|futures_ws_user_trade_fillls.py|-|
-|All Position|futures_ws_get_all_position.py|ws-get-all-position.js|
-|Positions|futures_ws_get_positions.py|ws-get-positions.js|
+|Document Name |Python |Node.js |C# (project) |
+| :--------   | :--------   | :--------   | :--------   |
+|Subscription|futures_ws_subscription.py |-|FutureWsSubscriptionProject|
+|Orderbook Snapshot (By grouping)|futures_ws_get_orderbook_group.py |-|-|
+|Orderbook Snapshot (By depth)|futures_ws_get_orderbook_depth.py|-|-|
+|Orderbook Incremental Updates|futures_ws_get_oss_delta.py|ws-get-orderbook-delta.js|FutureWsOrderbookDeltaProject|
+|Orderbook BBO Snapshot (snapshotL1)|futures_ws_get_oss_snapshot.py|-|FutureWsOrderbookSnapshotProject|
+|Public Trade Fills|futures_ws_public_trade_fills.py|ws-public-trades.js|FutureWsPublicTradeFillsProject|
+|Authentication|futures_ws_authentication.py|-|FuturesWsAuthenticationProject|
+|Notifications|futures_ws_notifcations.py|ws-notification-v2.js|FutureWsNotificationsProject|
+|User Trade Fills|futures_ws_user_trade_fillls.py|-|FutureWsUserTradeFillsProject|
+|All Position|futures_ws_get_all_position.py|ws-get-all-position.js|FutureWsAllPositionProject|
+|Positions|futures_ws_get_positions.py|ws-get-positions.js|FutureWsPositionsProject|
 
 ## OTC
 ### OTC Endpoints

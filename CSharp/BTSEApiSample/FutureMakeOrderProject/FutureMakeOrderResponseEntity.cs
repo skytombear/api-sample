@@ -10,9 +10,6 @@ public class FutureMakeOrderResponseEntity
     [JsonPropertyName("clOrderID")]
     public string ClOrderID { get; set; }
 
-    [JsonPropertyName("fillSize")]
-    public double FillSize { get; set; }
-
     [JsonPropertyName("orderID")]
     public string OrderID { get; set; }
 
@@ -27,9 +24,6 @@ public class FutureMakeOrderResponseEntity
 
     [JsonPropertyName("side")]
     public string Side { get; set; }
-
-    [JsonPropertyName("size")]
-    public long Size { get; set; }
 
     [JsonPropertyName("status")]
     public long Status { get; set; }
@@ -46,8 +40,8 @@ public class FutureMakeOrderResponseEntity
     [JsonPropertyName("triggerPrice")]
     public double TriggerPrice { get; set; }
 
-    [JsonPropertyName("avgFillPrice")]
-    public double AvgFillPrice { get; set; }
+    [JsonPropertyName("avgFilledPrice")]
+    public double AvgFilledPrice { get; set; }
 
     [JsonPropertyName("message")]
     public string Message { get; set; }
@@ -61,6 +55,15 @@ public class FutureMakeOrderResponseEntity
     [JsonPropertyName("remainingSize")]
     public double RemainingSize { get; set; }
 
-    [JsonPropertyName("originalSize")]
-    public double OriginalSize { get; set; }
+    [JsonPropertyName("originalOrderSize")]
+    public long OriginalOrderSize { get; set; }
+
+    [JsonPropertyName("currentOrderSize")]
+    public long CurrentOrderSize { get; set; }
+
+    [JsonPropertyName("filledSize")]
+    public long FilledSize { get; set; }
+
+    [JsonPropertyName("totalFilledSize")]
+    public long TotalFilledSize { get; set; }
 }
