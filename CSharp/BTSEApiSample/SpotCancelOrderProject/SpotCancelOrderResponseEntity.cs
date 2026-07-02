@@ -19,9 +19,6 @@ public class SpotCancelOrderResponseEntity
     [JsonPropertyName("side")]
     public string Side { get; set; }
 
-    [JsonPropertyName("size")]
-    public decimal Size { get; set; }
-
     [JsonPropertyName("orderID")]
     public string OrderID { get; set; }
 
@@ -43,9 +40,6 @@ public class SpotCancelOrderResponseEntity
     [JsonPropertyName("averageFillPrice")]
     public decimal AverageFillPrice { get; set; }
 
-    [JsonPropertyName("fillSize")]
-    public decimal FillSize { get; set; }
-
     [JsonPropertyName("clOrderID")]
     public string ClOrderID { get; set; }
 
@@ -58,11 +52,32 @@ public class SpotCancelOrderResponseEntity
     [JsonPropertyName("postOnly")]
     public bool PostOnly { get; set; }
 
-    [JsonPropertyName("originalSize")]
-    public decimal OriginalSize { get; set; }
+    [JsonPropertyName("originalOrderBaseSize")]
+    public decimal OriginalOrderBaseSize { get; set; }
 
-    [JsonPropertyName("remainingSize")]
-    public decimal RemainingSize { get; set; }
+    [JsonPropertyName("originalOrderQuoteSize")]
+    public decimal OriginalOrderQuoteSize { get; set; }
+
+    [JsonPropertyName("currentOrderBaseSize")]
+    public decimal CurrentOrderBaseSize { get; set; }
+
+    [JsonPropertyName("currentOrderQuoteSize")]
+    public decimal CurrentOrderQuoteSize { get; set; }
+
+    [JsonPropertyName("remainingOrderBaseSize")]
+    public decimal RemainingOrderBaseSize { get; set; }
+
+    [JsonPropertyName("remainingOrderQuoteSize")]
+    public decimal RemainingOrderQuoteSize { get; set; }
+
+    [JsonPropertyName("filledBaseSize")]
+    public decimal FilledBaseSize { get; set; }
+
+    [JsonPropertyName("totalFilledBaseSize")]
+    public decimal TotalFilledBaseSize { get; set; }
+
+    [JsonPropertyName("orderCurrency")]
+    public string OrderCurrency { get; set; }
 
     [JsonPropertyName("time_in_force")]
     public string TimeInForce { get; set; }

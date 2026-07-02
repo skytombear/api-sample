@@ -1,31 +1,31 @@
 using BTSEApiSample.Common;
 using Flurl;
 
-namespace SpotQueryMarketPriceProject;
+namespace SpotOrderbookProject;
 
-public class SpotQueryMarketPrice
+public class SpotOrderbook
 {
     private readonly HttpClient _httpClient = new();
 
-    public async Task<object> GetMarketPriceAsync(SpotQueryMarketRequestEntity requestEntity)
+    public async Task<object> GetOrderbookAsync(SpotOrderbookRequestEntity requestEntity)
     {
-        const string endpoint = $"/api/{ApiConstants.SpotApiVersion}/price";
+        const string endpoint = $"/api/{ApiConstants.SpotApiVersion}/orderbook";
         var url = Utils.GetSpotFullUrl(endpoint)
             .SetQueryParams(new
             {
                 symbol = requestEntity.Symbol,
+                group = requestEntity.Group
             });
 
         try
         {
             var response = await _httpClient.GetAsync(url);
-
             if (response.IsSuccessStatusCode)
             {
                 return await response.Content.ReadAsStringAsync();
             }
 
-            return $"Error: {response.StatusCode}";
+            return $"Error {response.StatusCode}: {await response.Content.ReadAsStringAsync()}";
         }
         catch (Exception ex)
         {

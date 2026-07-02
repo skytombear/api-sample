@@ -2,7 +2,7 @@ namespace BTSEApiSample.Common;
 
 public static class ApiConstants
 {
-    public const string SpotApiVersion = "v3.2";
+    public const string SpotApiVersion = "v3.3";
 
     public const string FuturesApiVersion = "v2.3";
 
