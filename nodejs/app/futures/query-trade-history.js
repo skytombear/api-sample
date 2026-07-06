@@ -11,11 +11,12 @@ const getTradeHistory = async (params) => {
     });
     return res.data;
   } catch (error) {
-    console.log(error);
     return error.response.data;
   }
 };
 
 getTradeHistory({
-  symbol: 'BTCPFC',
-}).then(console.log).catch(console.error);
+  symbol: 'BTC-PERP',
+})
+  .then(console.log)
+  .catch(console.error);

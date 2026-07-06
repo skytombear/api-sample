@@ -2,7 +2,7 @@ const axios = require('axios');
 const { SPOT_API_VERSION } = require('../utils/constants');
 const { getSpotUrl, getAuthHeaders } = require('../utils/common');
 
-const amendOrder = async ({ symbol, orderID, clOrderID, type, value, slide }) => {
+const amendOrder = async ({ symbol, orderID, clOrderID, type, value }) => {
   const endpoint = `/api/${SPOT_API_VERSION}/order`;
   const body = {
     symbol,
@@ -10,7 +10,6 @@ const amendOrder = async ({ symbol, orderID, clOrderID, type, value, slide }) =>
     clOrderID,
     type,
     value,
-    slide,
   };
   try {
     const res = await axios.put(getSpotUrl(endpoint), body, {

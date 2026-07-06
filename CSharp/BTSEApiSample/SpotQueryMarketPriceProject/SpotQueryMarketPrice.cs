@@ -9,8 +9,8 @@ public class SpotQueryMarketPrice
 
     public async Task<object> GetMarketPriceAsync(SpotQueryMarketRequestEntity requestEntity)
     {
-        const string endpoint = $"/api/{ApiConstants.FuturesApiVersion}/price";
-        var url = Utils.GetFuturesFullUrl(endpoint)
+        const string endpoint = $"/api/{ApiConstants.SpotApiVersion}/price";
+        var url = Utils.GetSpotFullUrl(endpoint)
             .SetQueryParams(new
             {
                 symbol = requestEntity.Symbol,

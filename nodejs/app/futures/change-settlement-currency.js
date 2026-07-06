@@ -2,10 +2,7 @@ const axios = require('axios');
 const { FUTURES_API_VERSION } = require('../utils/constants');
 const { getFuturesUrl, getAuthHeaders } = require('../utils/common');
 
-const changeSettlementCurrency = async ({
-  symbol,
-  currency,
-}) => {
+const changeSettlementCurrency = async ({ symbol, currency }) => {
   const endpoint = `/api/${FUTURES_API_VERSION}/settle_in`;
   const body = {
     symbol,
@@ -22,7 +19,7 @@ const changeSettlementCurrency = async ({
 };
 
 changeSettlementCurrency({
-  symbol: 'ETHPFC',
+  symbol: 'ETH-PERP',
   currency: 'ETH',
 })
   .then(console.log)

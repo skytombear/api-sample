@@ -2,7 +2,14 @@ const axios = require('axios');
 const { OTC_API_VERSION } = require('../utils/constants');
 const { getOtcUrl, getAuthHeaders } = require('../utils/common');
 
-const getOtcQuote = async ({ baseCurrency, orderCurrency, side, orderSizeInBaseCurrency, orderAmountInOrderCurrency, clientOrderId }) => {
+const getOtcQuote = async ({
+  baseCurrency,
+  orderCurrency,
+  side,
+  orderSizeInBaseCurrency,
+  orderAmountInOrderCurrency,
+  clientOrderId,
+}) => {
   const endpoint = `/api/${OTC_API_VERSION}/quote`;
   const body = {
     baseCurrency,

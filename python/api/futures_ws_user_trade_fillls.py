@@ -35,7 +35,7 @@ def on_open(ws):
 
     payload = {
         "op": "subscribe",
-        "args": ["fills"],
+        "args": ["fillsV2"],
     }
     ws.send(json.dumps(payload))
 

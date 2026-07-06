@@ -3,7 +3,6 @@ const { getWsOssSpotUrl } = require('../utils/common');
 
 const client = new webSocket(getWsOssSpotUrl());
 const market = 'BTC-USD';
-const grouping = 1;
 let lastTimestamp = 0;
 
 client.onerror = () => {
@@ -15,9 +14,11 @@ client.onopen = () => {
     if (client.readyState === client.OPEN) {
       const payload = {
         op: 'subscribe',
-        args: [`snapshot:${market}_${grouping}`],
+        args: [`snapshotL1:${market}`],
       };
-      console.log('subscribing snapshot orderbook to get the full orderbook for each update: ' + JSON.stringify(payload));
+      console.log(
+        'subscribing snapshot orderbook to get the full orderbook for each update: ' + JSON.stringify(payload)
+      );
       client.send(JSON.stringify(payload));
     }
   }
@@ -29,7 +30,6 @@ client.onclose = () => {
 };
 
 client.onmessage = (e) => {
-
   if (typeof e.data === 'string') {
     const now = Date.now();
     if (!lastTimestamp) {
@@ -38,6 +38,9 @@ client.onmessage = (e) => {
     const raw = JSON.parse(e.data);
     const topic = raw && raw.topic ? raw.topic : '';
     const data = raw.data;
+
+    // ignore the subscription ack (e.g. {"event":"subscribe",...}) which has no topic
+    if (!topic) return;
 
     if (topic.startsWith('snapshot')) {
       // NOTE: snapshot contains complete orderbook and can be used as the replacement for previous orderbook websocket topic

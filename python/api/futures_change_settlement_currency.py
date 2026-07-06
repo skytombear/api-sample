@@ -30,7 +30,7 @@ def futures_change_settlement_currency(data):
     except Exception as err:
         print("Other error occurred: {0}".format(err))
     finally:
-        ret = resp
+        ret = resp.json()
     return ret
 
 
@@ -38,7 +38,7 @@ if __name__ == "__main__":
     print(
         futures_change_settlement_currency(
             {
-                "symbol": "BTCPFC",
+                "symbol": "BTC-PERP",
                 "currency": "BTC",
             }
         )

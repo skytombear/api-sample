@@ -5,12 +5,12 @@ from requests.exceptions import HTTPError
 from utils import (
     get_env_info,
     get_futures_api_version,
-    get_spot_full_url,
+    get_futures_full_url,
     gen_headers,
 )
 
 
-def earn_get_ohlcv(data):
+def futures_query_account_fees(data):
     url = "/api/{0}/user/fees".format(get_futures_api_version())
     env = get_env_info()
     headers = gen_headers(env["API_KEY"], env["API_SECRET_KEY"], url)
@@ -18,7 +18,7 @@ def earn_get_ohlcv(data):
     ret = {}
     try:
         resp = requests.get(
-            get_spot_full_url(env["API_HOST"], url),
+            get_futures_full_url(env["API_HOST"], url),
             params=params,
             headers=headers,
         )
@@ -33,5 +33,5 @@ def earn_get_ohlcv(data):
 
 
 if __name__ == "__main__":
-    data = {"makerFee": 0, "symbol": "BTCPFC", "takerFee": 0}
-    print(earn_get_ohlcv(data))
+    data = {"symbol": "BTC-PERP"}
+    print(futures_query_account_fees(data))

@@ -30,7 +30,7 @@ def futures_place_limit_order(data):
     except Exception as err:
         print("Other error occurred: {0}".format(err))
     finally:
-        ret = resp
+        ret = resp.json()
     return ret
 
 
@@ -42,7 +42,7 @@ if __name__ == "__main__":
                 "size": 0.0002,
                 "price": 10,
                 "side": "BUY",
-                "symbol": "BTCPFC",
+                "symbol": "BTC-PERP",
                 "time_in_force": "GTC",
                 "txType": "LIMIT",
                 "type": "LIMIT",

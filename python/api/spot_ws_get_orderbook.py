@@ -18,6 +18,10 @@ def on_close(ws, close_status_code, close_msg):
 
 
 def on_open(ws):
+    # DEPRECATED (V3.3): the `orderBookApi` websocket topic has been removed.
+    # Grouped orderbook is now REST-only (GET /api/v3.3/orderbook). For realtime
+    # updates use the OSS streams instead: `update:<symbol>_<grouping>` (see
+    # spot_ws_get_oss_delta.py) or `snapshotL1:<symbol>` (spot_ws_get_oss_snapshot.py).
     payload = {
         "op": "subscribe",
         "args": ["orderBookApi:BTC-USD_0"],

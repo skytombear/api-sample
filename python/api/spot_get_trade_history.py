@@ -32,4 +32,4 @@ def spot_get_trade_history(params):
 
 
 if __name__ == "__main__":
-    print(spot_get_trade_history({"symbol": "BTC-USD", "includeOld": True}))
+    print(spot_get_trade_history({"symbol": "BTC-USD"}))

@@ -6,6 +6,7 @@ const getWalletBalance = async () => {
   const endpoint = `/api/${FUTURES_API_VERSION}/user/wallet`;
   try {
     const res = await axios.get(getFuturesUrl(endpoint), {
+      params: { wallet: 'CROSS@' },
       headers: getAuthHeaders(endpoint),
     });
     return res.data;

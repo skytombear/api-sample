@@ -24,5 +24,5 @@ def query_market_price(params):
 
 
 if __name__ == "__main__":
-    data = {"symbol": "BTC-USD"}
+    data = {"symbol": "BTC-PERP"}
     print(query_market_price(data))

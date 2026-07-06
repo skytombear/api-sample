@@ -36,7 +36,7 @@ def on_open(ws):
 
     payload = {
         "op": "subscribe",
-        "args": ["allPosition"],
+        "args": ["allPositionV4"],
     }
     ws.send(json.dumps(payload))
 

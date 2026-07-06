@@ -1,5 +1,5 @@
 const webSocket = require('ws');
-const { getAuthHeaders, getWsSpotUrl } = require('../utils/common');
+const { getWsSpotUrl } = require('../utils/common');
 
 const client = new webSocket(getWsSpotUrl());
 
@@ -13,7 +13,7 @@ client.onopen = () => {
       // subscribe to trade history api websocket
       const payload = {
         op: 'subscribe',
-        args: ['tradeHistory:BTC-USD'],
+        args: ['tradeHistoryApi:BTC-USD'],
       };
       console.log('sending msg: ' + JSON.stringify(payload));
       client.send(JSON.stringify(payload));

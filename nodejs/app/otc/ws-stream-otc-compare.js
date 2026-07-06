@@ -3,18 +3,17 @@ const { getWsOtcUrl, getAuthHeaders } = require('../utils/common');
 
 const url = getWsOtcUrl();
 const client = new webSocket(url);
-const result = {}
+const result = {};
 
 function _sortOnKeys(dict) {
-
   const sorted = [];
-  for(const key in dict) {
+  for (const key in dict) {
     sorted[sorted.length] = key;
   }
   sorted.sort((a, b) => parseFloat(a) - parseFloat(b));
 
   const array = [];
-  for(let i = 0; i < sorted.length; i++) {
+  for (let i = 0; i < sorted.length; i++) {
     array.push(dict[sorted[i]]);
   }
 
@@ -78,14 +77,7 @@ client.onclose = () => {
 
 client.onmessage = (e) => {
   if (typeof e.data === 'string') {
-    const {
-      symbol,
-      buyQuantity: amount,
-      buyUnitPrice,
-      sellUnitPrice,
-      timestamp
-    } = JSON.parse(e.data);
-
+    const { symbol, buyQuantity: amount, buyUnitPrice, sellUnitPrice, timestamp } = JSON.parse(e.data);
 
     if (!symbol || !amount || !buyUnitPrice || !sellUnitPrice) {
       return;

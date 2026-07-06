@@ -32,12 +32,12 @@ def get_env_info():
 
 def get_spot_api_version():
     """Get spot api version"""
-    return "v3.2"
+    return "v3.3"
 
 
 def get_futures_api_version():
     """Get futures api version"""
-    return "v2.1"
+    return "v2.3"
 
 
 def get_otc_api_version():
