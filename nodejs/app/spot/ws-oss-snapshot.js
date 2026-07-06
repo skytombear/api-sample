@@ -39,6 +39,9 @@ client.onmessage = (e) => {
     const topic = raw && raw.topic ? raw.topic : '';
     const data = raw.data;
 
+    // ignore the subscription ack (e.g. {"event":"subscribe",...}) which has no topic
+    if (!topic) return;
+
     if (topic.startsWith('snapshot')) {
       // NOTE: snapshot contains complete orderbook and can be used as the replacement for previous orderbook websocket topic
       // the `bids` and `asks` under data object contain correspoding orders.

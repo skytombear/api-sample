@@ -30,7 +30,7 @@ def funct(data):
     except Exception as err:
         print("Other error occurred: {0}".format(err))
     finally:
-        ret = resp
+        ret = resp.json()
     return ret
 
 
