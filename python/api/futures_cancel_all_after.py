@@ -30,7 +30,8 @@ def funct(data):
     except Exception as err:
         print("Other error occurred: {0}".format(err))
     finally:
-        ret = resp.json()
+        # cancelAllAfter can succeed with an empty body (HTTP 200, no JSON)
+        ret = resp.json() if resp.text else {"status_code": resp.status_code}
     return ret
 
 

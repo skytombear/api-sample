@@ -15,14 +15,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api-url}}/spot/api/v3.2/market_summary",
+							"raw": "{{api-url}}/spot/api/v3.3/market_summary",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"spot",
 								"api",
-								"v3.2",
+								"v3.3",
 								"market_summary"
 							]
 						}
@@ -35,14 +35,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api-url}}/spot/api/v3.2/ohlcv?symbol=BTC-USD&resolution=30",
+							"raw": "{{api-url}}/spot/api/v3.3/ohlcv?symbol=BTC-USD&resolution=30",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"spot",
 								"api",
-								"v3.2",
+								"v3.3",
 								"ohlcv"
 							],
 							"query": [
@@ -67,14 +67,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api-url}}/spot/api/v3.2/price",
+							"raw": "{{api-url}}/spot/api/v3.3/price",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"spot",
 								"api",
-								"v3.2",
+								"v3.3",
 								"price"
 							]
 						}
@@ -87,14 +87,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api-url}}/spot/api/v3.2/orderbook?symbol=BTC-USDT&group=1&limit_bids=5&limit_asks=10",
+							"raw": "{{api-url}}/spot/api/v3.3/orderbook?symbol=BTC-USDT&group=1&limit_bids=5&limit_asks=10",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"spot",
 								"api",
-								"v3.2",
+								"v3.3",
 								"orderbook"
 							],
 							"query": [
@@ -125,14 +125,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api-url}}/spot/api/v3.2/orderbook/L2?symbol=BTC-USD&depth=5",
+							"raw": "{{api-url}}/spot/api/v3.3/orderbook/L2?symbol=BTC-USD&depth=5",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"spot",
 								"api",
-								"v3.2",
+								"v3.3",
 								"orderbook",
 								"L2"
 							],
@@ -156,14 +156,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api-url}}/spot/api/v3.2/trades?symbol=BTC-USD",
+							"raw": "{{api-url}}/spot/api/v3.3/trades?symbol=BTC-USD",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"spot",
 								"api",
-								"v3.2",
+								"v3.3",
 								"trades"
 							],
 							"query": [
@@ -182,14 +182,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api-url}}/spot/api/v3.2/time",
+							"raw": "{{api-url}}/spot/api/v3.3/time",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"spot",
 								"api",
-								"v3.2",
+								"v3.3",
 								"time"
 							]
 						}
@@ -197,7 +197,7 @@
 					"response": []
 				},
 				{
-					"name": "create-peg-order",
+					"name": "create-limit-order",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -232,15 +232,366 @@
 							}
 						},
 						"url": {
-							"raw": "{{api-url}}/spot/api/v3.2/order",
+							"raw": "{{api-url}}/spot/api/v3.3/order",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"spot",
 								"api",
-								"v3.2",
+								"v3.3",
 								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-market-order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "request-api",
+								"value": "{{api-key}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{api-secret}}",
+								"type": "text"
+							},
+							{
+								"key": "request-nonce",
+								"value": "{{api-nonce}}",
+								"type": "text"
+							},
+							{
+								"key": "request-sign",
+								"value": "{{api-sign}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"symbol\": \"BTC-USD\",\n  \"size\": 0.0005,\n  \"side\": \"SELL\",\n  \"type\": \"MARKET\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/spot/api/v3.3/order",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"spot",
+								"api",
+								"v3.3",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-oco-order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "request-api",
+								"value": "{{api-key}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{api-secret}}",
+								"type": "text"
+							},
+							{
+								"key": "request-nonce",
+								"value": "{{api-nonce}}",
+								"type": "text"
+							},
+							{
+								"key": "request-sign",
+								"value": "{{api-sign}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"symbol\": \"BTC-USD\",\n  \"size\": 0.0005,\n  \"price\": 20300,\n  \"side\": \"BUY\",\n  \"type\": \"OCO\",\n  \"txType\": \"LIMIT\",\n  \"stopPrice\": 20300,\n  \"triggerPrice\": 20309\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/spot/api/v3.3/order",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"spot",
+								"api",
+								"v3.3",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-market-stop-order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "request-api",
+								"value": "{{api-key}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{api-secret}}",
+								"type": "text"
+							},
+							{
+								"key": "request-nonce",
+								"value": "{{api-nonce}}",
+								"type": "text"
+							},
+							{
+								"key": "request-sign",
+								"value": "{{api-sign}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"symbol\": \"BTC-USD\",\n  \"price\": 30,\n  \"side\": \"BUY\",\n  \"type\": \"MARKET\",\n  \"txType\": \"STOP\",\n  \"triggerPrice\": 31000,\n  \"triggerPriceType\": \"LAST_PRICE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/spot/api/v3.3/order",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"spot",
+								"api",
+								"v3.3",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-trailing-stop-order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "request-api",
+								"value": "{{api-key}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{api-secret}}",
+								"type": "text"
+							},
+							{
+								"key": "request-nonce",
+								"value": "{{api-nonce}}",
+								"type": "text"
+							},
+							{
+								"key": "request-sign",
+								"value": "{{api-sign}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"symbol\": \"BTC-USD\",\n  \"price\": 30,\n  \"side\": \"BUY\",\n  \"type\": \"MARKET\",\n  \"txType\": \"STOP\",\n  \"trailValue\": 0.05,\n  \"trailValueType\": \"PERCENTAGE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/spot/api/v3.3/order",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"spot",
+								"api",
+								"v3.3",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-market-take-profit-order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "request-api",
+								"value": "{{api-key}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{api-secret}}",
+								"type": "text"
+							},
+							{
+								"key": "request-nonce",
+								"value": "{{api-nonce}}",
+								"type": "text"
+							},
+							{
+								"key": "request-sign",
+								"value": "{{api-sign}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"symbol\": \"BTC-USD\",\n  \"price\": 30,\n  \"side\": \"BUY\",\n  \"type\": \"MARKET\",\n  \"txType\": \"TRIGGER\",\n  \"triggerPrice\": 31000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/spot/api/v3.3/order",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"spot",
+								"api",
+								"v3.3",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-limit-stop-order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "request-api",
+								"value": "{{api-key}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{api-secret}}",
+								"type": "text"
+							},
+							{
+								"key": "request-nonce",
+								"value": "{{api-nonce}}",
+								"type": "text"
+							},
+							{
+								"key": "request-sign",
+								"value": "{{api-sign}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"symbol\": \"BTC-USD\",\n  \"size\": 0.0005,\n  \"price\": 34000,\n  \"side\": \"BUY\",\n  \"type\": \"LIMIT\",\n  \"txType\": \"STOP\",\n  \"triggerPrice\": 32000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/spot/api/v3.3/order",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"spot",
+								"api",
+								"v3.3",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-peg-order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "request-api",
+								"value": "{{api-key}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{api-secret}}",
+								"type": "text"
+							},
+							{
+								"key": "request-nonce",
+								"value": "{{api-nonce}}",
+								"type": "text"
+							},
+							{
+								"key": "request-sign",
+								"value": "{{api-sign}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"symbol\": \"BTC-USD\",\n  \"size\": 0.0005,\n  \"price\": 25000,\n  \"side\": \"BUY\",\n  \"type\": \"PEG\",\n  \"deviation\": -10,\n  \"stealth\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/spot/api/v3.3/order/peg",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"spot",
+								"api",
+								"v3.3",
+								"order",
+								"peg"
 							]
 						}
 					},
@@ -282,14 +633,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{api-url}}/spot/api/v3.2/order",
+							"raw": "{{api-url}}/spot/api/v3.3/order",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"spot",
 								"api",
-								"v3.2",
+								"v3.3",
 								"order"
 							]
 						}
@@ -323,14 +674,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{api-url}}/spot/api/v3.2/order?symbol=BTC-USD",
+							"raw": "{{api-url}}/spot/api/v3.3/order?symbol=BTC-USD",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"spot",
 								"api",
-								"v3.2",
+								"v3.3",
 								"order"
 							],
 							"query": [
@@ -379,14 +730,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{api-url}}/spot/api/v3.2/order/cancelAllAfter",
+							"raw": "{{api-url}}/spot/api/v3.3/order/cancelAllAfter",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"spot",
 								"api",
-								"v3.2",
+								"v3.3",
 								"order",
 								"cancelAllAfter"
 							]
@@ -442,14 +793,14 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{api-url}}/spot/api/v3.2/user/open_orders?symbol=BTC-USD",
+							"raw": "{{api-url}}/spot/api/v3.3/user/open_orders?symbol=BTC-USD",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"spot",
 								"api",
-								"v3.2",
+								"v3.3",
 								"user",
 								"open_orders"
 							],
@@ -490,14 +841,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{api-url}}/spot/api/v3.2/user/trade_history?symbol=BTC-USD",
+							"raw": "{{api-url}}/spot/api/v3.3/user/trade_history?symbol=BTC-USD",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"spot",
 								"api",
-								"v3.2",
+								"v3.3",
 								"user",
 								"trade_history"
 							],
@@ -538,14 +889,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{api-url}}/spot/api/v3.2/user/fees",
+							"raw": "{{api-url}}/spot/api/v3.3/user/fees",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"spot",
 								"api",
-								"v3.2",
+								"v3.3",
 								"user",
 								"fees"
 							]
@@ -597,14 +948,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api-url}}/futures/api/v2.1/market_summary",
+							"raw": "{{api-url}}/futures/api/v2.3/market_summary",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"futures",
 								"api",
-								"v2.1",
+								"v2.3",
 								"market_summary"
 							],
 							"query": [
@@ -624,20 +975,20 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api-url}}/futures/api/v2.1/ohlcv?symbol=BTCPFC&resolution=15",
+							"raw": "{{api-url}}/futures/api/v2.3/ohlcv?symbol=BTC-PERP&resolution=15",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"futures",
 								"api",
-								"v2.1",
+								"v2.3",
 								"ohlcv"
 							],
 							"query": [
 								{
 									"key": "symbol",
-									"value": "BTCPFC",
+									"value": "BTC-PERP",
 									"description": "market symbol"
 								},
 								{
@@ -656,14 +1007,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api-url}}/futures/api/v2.1/price",
+							"raw": "{{api-url}}/futures/api/v2.3/price",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"futures",
 								"api",
-								"v2.1",
+								"v2.3",
 								"price"
 							]
 						}
@@ -676,20 +1027,20 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api-url}}/futures/api/v2.1/orderbook?symbol=BTCPFC",
+							"raw": "{{api-url}}/futures/api/v2.3/orderbook?symbol=BTC-PERP",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"futures",
 								"api",
-								"v2.1",
+								"v2.3",
 								"orderbook"
 							],
 							"query": [
 								{
 									"key": "symbol",
-									"value": "BTCPFC"
+									"value": "BTC-PERP"
 								}
 							]
 						}
@@ -702,21 +1053,21 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api-url}}/futures/api/v2.1/orderbook/L2?symbol=BTCPFC&depth=5",
+							"raw": "{{api-url}}/futures/api/v2.3/orderbook/L2?symbol=BTC-PERP&depth=5",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"futures",
 								"api",
-								"v2.1",
+								"v2.3",
 								"orderbook",
 								"L2"
 							],
 							"query": [
 								{
 									"key": "symbol",
-									"value": "BTCPFC"
+									"value": "BTC-PERP"
 								},
 								{
 									"key": "depth",
@@ -733,20 +1084,20 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api-url}}/futures/api/v2.1/trades?symbol=BTCPFC&count=10",
+							"raw": "{{api-url}}/futures/api/v2.3/trades?symbol=BTC-PERP&count=10",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"futures",
 								"api",
-								"v2.1",
+								"v2.3",
 								"trades"
 							],
 							"query": [
 								{
 									"key": "symbol",
-									"value": "BTCPFC"
+									"value": "BTC-PERP"
 								},
 								{
 									"key": "count",
@@ -796,7 +1147,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"symbol\": \"BTCPFC\",\n  \"size\": 1,\n  \"price\": 11000,\n  \"side\": \"BUY\",\n  \"type\": \"LIMIT\"\n}",
+							"raw": "{\n  \"symbol\": \"BTC-PERP\",\n  \"size\": 1,\n  \"price\": 11000,\n  \"side\": \"BUY\",\n  \"type\": \"LIMIT\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -804,14 +1155,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{api-url}}/futures/api/v2.1/order",
+							"raw": "{{api-url}}/futures/api/v2.3/order",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"futures",
 								"api",
-								"v2.1",
+								"v2.3",
 								"order"
 							]
 						}
@@ -846,7 +1197,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"symbol\": \"BTCPFC\",\n  \"price\": 11500,\n  \"size\": 1,\n  \"side\": \"BUY\",\n  \"stealth\": 10,\n  \"deviation\": -10\n}",
+							"raw": "{\n  \"symbol\": \"BTC-PERP\",\n  \"price\": 11500,\n  \"size\": 1,\n  \"side\": \"BUY\",\n  \"stealth\": 10,\n  \"deviation\": -10\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -854,16 +1205,516 @@
 							}
 						},
 						"url": {
-							"raw": "{{api-url}}/futures/api/v2.1/order/peg",
+							"raw": "{{api-url}}/futures/api/v2.3/order/peg",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"futures",
 								"api",
-								"v2.1",
+								"v2.3",
 								"order",
 								"peg"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-market-order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "request-api",
+								"value": "{{api-key}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{api-secret}}",
+								"type": "text"
+							},
+							{
+								"key": "request-nonce",
+								"value": "{{api-nonce}}",
+								"type": "text"
+							},
+							{
+								"key": "request-sign",
+								"value": "{{api-sign}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"clOrderID\": \"test-order-placement\",\n  \"size\": 0.0005,\n  \"side\": \"BUY\",\n  \"symbol\": \"BTC-PERP\",\n  \"txType\": \"LIMIT\",\n  \"type\": \"MARKET\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/futures/api/v2.3/order",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"futures",
+								"api",
+								"v2.3",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-oco-order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "request-api",
+								"value": "{{api-key}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{api-secret}}",
+								"type": "text"
+							},
+							{
+								"key": "request-nonce",
+								"value": "{{api-nonce}}",
+								"type": "text"
+							},
+							{
+								"key": "request-sign",
+								"value": "{{api-sign}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"clOrderID\": \"test-order-placement\",\n  \"size\": 1,\n  \"price\": 20100,\n  \"side\": \"BUY\",\n  \"time_in_force\": \"GTC\",\n  \"symbol\": \"BTC-PERP\",\n  \"triggerPrice\": 20400,\n  \"stopPrice\": 20401,\n  \"type\": \"OCO\",\n  \"txType\": \"LIMIT\",\n  \"trigger\": \"markPrice\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/futures/api/v2.3/order",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"futures",
+								"api",
+								"v2.3",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-reduce-only-order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "request-api",
+								"value": "{{api-key}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{api-secret}}",
+								"type": "text"
+							},
+							{
+								"key": "request-nonce",
+								"value": "{{api-nonce}}",
+								"type": "text"
+							},
+							{
+								"key": "request-sign",
+								"value": "{{api-sign}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"size\": 1,\n  \"price\": 20000,\n  \"side\": \"SELL\",\n  \"symbol\": \"BTC-PERP\",\n  \"type\": \"LIMIT\",\n  \"reduceOnly\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/futures/api/v2.3/order",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"futures",
+								"api",
+								"v2.3",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-limit-stop-order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "request-api",
+								"value": "{{api-key}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{api-secret}}",
+								"type": "text"
+							},
+							{
+								"key": "request-nonce",
+								"value": "{{api-nonce}}",
+								"type": "text"
+							},
+							{
+								"key": "request-sign",
+								"value": "{{api-sign}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"clOrderID\": \"test-stop-order-placement\",\n  \"size\": 1,\n  \"price\": 21000,\n  \"side\": \"BUY\",\n  \"symbol\": \"BTC-PERP\",\n  \"type\": \"LIMIT\",\n  \"txType\": \"STOP\",\n  \"triggerPrice\": 30000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/futures/api/v2.3/order",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"futures",
+								"api",
+								"v2.3",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-trailing-stop-order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "request-api",
+								"value": "{{api-key}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{api-secret}}",
+								"type": "text"
+							},
+							{
+								"key": "request-nonce",
+								"value": "{{api-nonce}}",
+								"type": "text"
+							},
+							{
+								"key": "request-sign",
+								"value": "{{api-sign}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"clOrderID\": \"test-trailing-stop-order-placement\",\n  \"size\": 1,\n  \"side\": \"BUY\",\n  \"symbol\": \"BTC-PERP\",\n  \"type\": \"MARKET\",\n  \"txType\": \"TRIGGER\",\n  \"trigger\": \"lastPrice\",\n  \"trailValue\": 0.05,\n  \"trailValueType\": \"PERCENTAGE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/futures/api/v2.3/order",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"futures",
+								"api",
+								"v2.3",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-limit-trigger-order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "request-api",
+								"value": "{{api-key}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{api-secret}}",
+								"type": "text"
+							},
+							{
+								"key": "request-nonce",
+								"value": "{{api-nonce}}",
+								"type": "text"
+							},
+							{
+								"key": "request-sign",
+								"value": "{{api-sign}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"symbol\": \"BTC-PERP\",\n  \"size\": 1,\n  \"price\": 21000,\n  \"side\": \"BUY\",\n  \"type\": \"LIMIT\",\n  \"txType\": \"TRIGGER\",\n  \"triggerPrice\": 30000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/futures/api/v2.3/order",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"futures",
+								"api",
+								"v2.3",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-order-with-tp-sl",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "request-api",
+								"value": "{{api-key}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{api-secret}}",
+								"type": "text"
+							},
+							{
+								"key": "request-nonce",
+								"value": "{{api-nonce}}",
+								"type": "text"
+							},
+							{
+								"key": "request-sign",
+								"value": "{{api-sign}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"symbol\": \"BTC-PERP\",\n  \"size\": 1,\n  \"price\": 29000,\n  \"side\": \"BUY\",\n  \"type\": \"LIMIT\",\n  \"takeProfitPrice\": 31000,\n  \"takeProfitTrigger\": \"markPrice\",\n  \"stopLossPrice\": 27000,\n  \"stopLossTrigger\": \"lastPrice\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/futures/api/v2.3/order",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"futures",
+								"api",
+								"v2.3",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-order-with-tp-only",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "request-api",
+								"value": "{{api-key}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{api-secret}}",
+								"type": "text"
+							},
+							{
+								"key": "request-nonce",
+								"value": "{{api-nonce}}",
+								"type": "text"
+							},
+							{
+								"key": "request-sign",
+								"value": "{{api-sign}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"symbol\": \"BTC-PERP\",\n  \"size\": 1,\n  \"price\": 29000,\n  \"side\": \"BUY\",\n  \"type\": \"LIMIT\",\n  \"takeProfitPrice\": 31000,\n  \"takeProfitTrigger\": \"markPrice\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/futures/api/v2.3/order",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"futures",
+								"api",
+								"v2.3",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-order-with-sl-only",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "request-api",
+								"value": "{{api-key}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{api-secret}}",
+								"type": "text"
+							},
+							{
+								"key": "request-nonce",
+								"value": "{{api-nonce}}",
+								"type": "text"
+							},
+							{
+								"key": "request-sign",
+								"value": "{{api-sign}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"symbol\": \"BTC-PERP\",\n  \"size\": 1,\n  \"price\": 29000,\n  \"side\": \"BUY\",\n  \"type\": \"LIMIT\",\n  \"stopLossPrice\": 27000,\n  \"stopLossTrigger\": \"lastPrice\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/futures/api/v2.3/order",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"futures",
+								"api",
+								"v2.3",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-hedge-mode-market-order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "request-api",
+								"value": "{{api-key}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{api-secret}}",
+								"type": "text"
+							},
+							{
+								"key": "request-nonce",
+								"value": "{{api-nonce}}",
+								"type": "text"
+							},
+							{
+								"key": "request-sign",
+								"value": "{{api-sign}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"symbol\": \"BTC-PERP\",\n  \"size\": 1,\n  \"side\": \"BUY\",\n  \"type\": \"MARKET\",\n  \"positionMode\": \"HEDGE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/futures/api/v2.3/order",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"futures",
+								"api",
+								"v2.3",
+								"order"
 							]
 						}
 					},
@@ -897,7 +1748,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"symbol\": \"BTCPFC\",\n  \"orderID\": \"61d3ec71-384c-494d-94fc-397a1c169300\",\n  \"type\": \"PRICE\",\n  \"value\": 13000\n}",
+							"raw": "{\n  \"symbol\": \"BTC-PERP\",\n  \"orderID\": \"61d3ec71-384c-494d-94fc-397a1c169300\",\n  \"type\": \"PRICE\",\n  \"value\": 13000\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -905,14 +1756,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{api-url}}/futures/api/v2.1/order",
+							"raw": "{{api-url}}/futures/api/v2.3/order",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"futures",
 								"api",
-								"v2.1",
+								"v2.3",
 								"order"
 							]
 						}
@@ -946,20 +1797,20 @@
 							}
 						],
 						"url": {
-							"raw": "{{api-url}}/futures/api/v2.1/order?symbol=BTCPFC",
+							"raw": "{{api-url}}/futures/api/v2.3/order?symbol=BTC-PERP",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"futures",
 								"api",
-								"v2.1",
+								"v2.3",
 								"order"
 							],
 							"query": [
 								{
 									"key": "symbol",
-									"value": "BTCPFC"
+									"value": "BTC-PERP"
 								}
 							]
 						}
@@ -1002,14 +1853,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{api-url}}/futures/api/v2.1/order/cancelAllAfter",
+							"raw": "{{api-url}}/futures/api/v2.3/order/cancelAllAfter",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"futures",
 								"api",
-								"v2.1",
+								"v2.3",
 								"order",
 								"cancelAllAfter"
 							]
@@ -1044,21 +1895,21 @@
 							}
 						],
 						"url": {
-							"raw": "{{api-url}}/futures/api/v2.1/user/open_orders?symbol=BTCPFC",
+							"raw": "{{api-url}}/futures/api/v2.3/user/open_orders?symbol=BTC-PERP",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"futures",
 								"api",
-								"v2.1",
+								"v2.3",
 								"user",
 								"open_orders"
 							],
 							"query": [
 								{
 									"key": "symbol",
-									"value": "BTCPFC"
+									"value": "BTC-PERP"
 								}
 							]
 						}
@@ -1092,21 +1943,21 @@
 							}
 						],
 						"url": {
-							"raw": "{{api-url}}/futures/api/v2.1/user/trade_history?symbol=BTCPFC",
+							"raw": "{{api-url}}/futures/api/v2.3/user/trade_history?symbol=BTC-PERP",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"futures",
 								"api",
-								"v2.1",
+								"v2.3",
 								"user",
 								"trade_history"
 							],
 							"query": [
 								{
 									"key": "symbol",
-									"value": "BTCPFC"
+									"value": "BTC-PERP"
 								}
 							]
 						}
@@ -1140,21 +1991,21 @@
 							}
 						],
 						"url": {
-							"raw": "{{api-url}}/futures/api/v2.1/user/positions?symbol=BTCPFC",
+							"raw": "{{api-url}}/futures/api/v2.3/user/positions?symbol=BTC-PERP",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"futures",
 								"api",
-								"v2.1",
+								"v2.3",
 								"user",
 								"positions"
 							],
 							"query": [
 								{
 									"key": "symbol",
-									"value": "BTCPFC"
+									"value": "BTC-PERP"
 								}
 							]
 						}
@@ -1189,7 +2040,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"price\": 0,\n  \"symbol\": \"BTCPFC\",\n  \"type\": \"MARKET\"\n}",
+							"raw": "{\n  \"price\": 0,\n  \"symbol\": \"BTC-PERP\",\n  \"type\": \"MARKET\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1197,14 +2048,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{api-url}}/futures/api/v2.1/order/close_position",
+							"raw": "{{api-url}}/futures/api/v2.3/order/close_position",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"futures",
 								"api",
-								"v2.1",
+								"v2.3",
 								"order",
 								"close_position"
 							]
@@ -1240,7 +2091,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"symbol\": \"BTCPFC\",\n  \"riskLimit\": 0\n}",
+							"raw": "{\n  \"symbol\": \"BTC-PERP\",\n  \"riskLimit\": 0\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1248,14 +2099,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{api-url}}/futures/api/v2.1/risk_limit",
+							"raw": "{{api-url}}/futures/api/v2.3/risk_limit",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"futures",
 								"api",
-								"v2.1",
+								"v2.3",
 								"risk_limit"
 							]
 						}
@@ -1290,7 +2141,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"symbol\": \"BTCPFC\",\n  \"leverage\": 0\n}",
+							"raw": "{\n  \"symbol\": \"BTC-PERP\",\n  \"leverage\": 0\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1298,14 +2149,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{api-url}}/futures/api/v2.1/leverage",
+							"raw": "{{api-url}}/futures/api/v2.3/leverage",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"futures",
 								"api",
-								"v2.1",
+								"v2.3",
 								"leverage"
 							]
 						}
@@ -1340,7 +2191,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"symbol\": \"BTCPFC\",\n  \"currency\": \"BTC\"\n}",
+							"raw": "{\n  \"symbol\": \"BTC-PERP\",\n  \"currency\": \"BTC\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1348,14 +2199,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{api-url}}/futures/api/v2.1/settle_in",
+							"raw": "{{api-url}}/futures/api/v2.3/settle_in",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"futures",
 								"api",
-								"v2.1",
+								"v2.3",
 								"settle_in"
 							]
 						}
@@ -1389,14 +2240,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{api-url}}/futures/api/v2.1/user/fees",
+							"raw": "{{api-url}}/futures/api/v2.3/user/fees",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"futures",
 								"api",
-								"v2.1",
+								"v2.3",
 								"user",
 								"fees"
 							]
@@ -1431,14 +2282,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{api-url}}/futures/api/v2.1/user/wallet",
+							"raw": "{{api-url}}/futures/api/v2.3/user/wallet",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"futures",
 								"api",
-								"v2.1",
+								"v2.3",
 								"user",
 								"wallet"
 							]
@@ -1473,14 +2324,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{api-url}}/futures/api/v2.1/user/wallet_history",
+							"raw": "{{api-url}}/futures/api/v2.3/user/wallet_history",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"futures",
 								"api",
-								"v2.1",
+								"v2.3",
 								"user",
 								"wallet_history"
 							]
@@ -1515,21 +2366,21 @@
 							}
 						],
 						"url": {
-							"raw": "{{api-url}}/futures/api/v2.1/user/margin?symbol=BTCPFC",
+							"raw": "{{api-url}}/futures/api/v2.3/user/margin?symbol=BTC-PERP",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"futures",
 								"api",
-								"v2.1",
+								"v2.3",
 								"user",
 								"margin"
 							],
 							"query": [
 								{
 									"key": "symbol",
-									"value": "BTCPFC"
+									"value": "BTC-PERP"
 								}
 							]
 						}
@@ -1575,14 +2426,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{api-url}}/futures/api/v2.1/user/wallet/transfer",
+							"raw": "{{api-url}}/futures/api/v2.3/user/wallet/transfer",
 							"host": [
 								"{{api-url}}"
 							],
 							"path": [
 								"futures",
 								"api",
-								"v2.1",
+								"v2.3",
 								"user",
 								"wallet",
 								"transfer"

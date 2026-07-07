@@ -5,13 +5,13 @@ from requests.exceptions import HTTPError
 from utils import (
     gen_headers,
     get_env_info,
-    get_spot_api_version,
+    get_wallet_api_version,
     get_spot_full_url,
 )
 
 
 def queryWalletBalance(params):
-    url = "/api/{0}/user/wallet".format(get_spot_api_version())
+    url = "/api/{0}/user/wallet".format(get_wallet_api_version())
     env = get_env_info()
     headers = gen_headers(env["API_KEY"], env["API_SECRET_KEY"], url)
     ret = {}

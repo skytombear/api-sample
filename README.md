@@ -12,6 +12,16 @@ Sample connectors for connecting to the BTSE API.
 
 ## Change Log
 
+* 2026-07-07
+  - Update **Postman** collection to match the current sample coverage and the v3.3 / v2.3 docs.
+    - Bump Spot API version `v3.2` -> `v3.3` and Futures `v2.1` -> `v2.3` (Wallet stays `v3.2`, OTC stays `v1`).
+    - Update Futures order examples to the `BTC-PERP` symbol format.
+    - Rename the mislabelled Spot `create-peg-order` (its body was a plain LIMIT order) to `create-limit-order`, and add a real `create-peg-order`.
+    - Add the full set of Create Order examples per the docs:
+      - Spot: MARKET, MARKET STOP, MARKET TAKE PROFIT, LIMIT STOP, OCO, TRAILING STOP, PEG.
+      - Futures: MARKET, LIMIT TRIGGER, LIMIT STOP, OCO, reduce-only, TP/SL (plus TP-only / SL-only), hedge-mode MARKET, TRAILING STOP.
+    - Trailing/stop trailing orders include the `trailValueType` field required by the live venue (not documented).
+
 * 2026-07-02
   - Update **Spot** samples to API v3.3 across Python / Node.js / C#.
     - Bump spot API version `v3.2` -> `v3.3` (symbols already `BTC-USD`).

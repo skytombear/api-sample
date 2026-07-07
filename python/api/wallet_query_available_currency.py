@@ -4,14 +4,14 @@ import requests
 from requests.exceptions import HTTPError
 from utils import (
     get_env_info,
-    get_spot_api_version,
+    get_wallet_api_version,
     get_spot_full_url,
     gen_headers,
 )
 
 
 def availableCurrencies(data):
-    url = "/api/{0}/availableCurrencies".format(get_spot_api_version())
+    url = "/api/{0}/availableCurrencies".format(get_wallet_api_version())
     env = get_env_info()
     headers = gen_headers(env["API_KEY"], env["API_SECRET_KEY"], url)
     ret = {}

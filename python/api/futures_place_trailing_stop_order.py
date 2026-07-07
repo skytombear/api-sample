@@ -1,0 +1,55 @@
+#!/usr/bin/env python3
+
+import json
+import requests
+from requests.exceptions import HTTPError
+from utils import (
+    get_env_info,
+    get_futures_api_version,
+    get_futures_full_url,
+    gen_headers,
+)
+
+
+def futures_place_trailing_stop_order(data):
+    url = "/api/{0}/order".format(get_futures_api_version())
+    env = get_env_info()
+    headers = gen_headers(
+        env["API_KEY"], env["API_SECRET_KEY"], url, json.dumps(data)
+    )
+    ret = {}
+    try:
+        resp = requests.post(
+            get_futures_full_url(env["API_HOST"], url),
+            json=data,
+            headers=headers,
+        )
+        resp.raise_for_status()
+    except HTTPError as http_err:
+        print("HTTP error occurred: {0}".format(http_err))
+    except Exception as err:
+        print("Other error occurred: {0}".format(err))
+    finally:
+        ret = resp.json()
+    return ret
+
+
+if __name__ == "__main__":
+    # Trailing stop: txType=TRIGGER with a trigger price source (lastPrice /
+    # markPrice). trailValueType is required; trailValue is a decimal in the
+    # range [0.001, 0.99] when trailValueType is PERCENTAGE.
+    print(
+        futures_place_trailing_stop_order(
+            {
+                "clOrderID": "test-trailing-stop-order-placement",
+                "size": 1,
+                "side": "BUY",
+                "symbol": "BTC-PERP",
+                "type": "MARKET",
+                "txType": "TRIGGER",
+                "trigger": "lastPrice",
+                "trailValue": 0.05,
+                "trailValueType": "PERCENTAGE",
+            }
+        )
+    )

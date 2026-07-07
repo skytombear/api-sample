@@ -33,7 +33,7 @@ def spot_place_order(data):
 
 
 if __name__ == "__main__":
-    # 4 kinds of data input
+    # 6 kinds of data input
     market_order_data = {
         "symbol": "BTC-USD",
         "size": 0.0005,
@@ -70,4 +70,30 @@ if __name__ == "__main__":
         "stealth": 10,
     }
 
+    # MARKET STOP: `price` is the max spend amount and must NOT be sent
+    # together with `size` (otherwise: "Size and Price should not be mixed").
+    stop_order_data = {
+        "symbol": "BTC-USD",
+        "price": 30,
+        "side": "BUY",
+        "type": "MARKET",
+        "txType": "STOP",
+        "triggerPrice": 31000,
+        "triggerPriceType": "LAST_PRICE",
+    }
+
+    # TRAILING STOP: trailValueType is required (PERCENTAGE); trailValue is a
+    # decimal in the range [0.001, 0.99]. Like MARKET STOP, do not send `size`.
+    trailing_stop_order_data = {
+        "symbol": "BTC-USD",
+        "price": 30,
+        "side": "BUY",
+        "type": "MARKET",
+        "txType": "STOP",
+        "trailValue": 0.05,
+        "trailValueType": "PERCENTAGE",
+    }
+
     print(spot_place_order(market_order_data))
+    print(spot_place_order(stop_order_data))
+    print(spot_place_order(trailing_stop_order_data))

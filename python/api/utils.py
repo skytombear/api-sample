@@ -35,6 +35,15 @@ def get_spot_api_version():
     return "v3.3"
 
 
+def get_wallet_api_version():
+    """Get wallet api version
+
+    Wallet endpoints live under the /spot path but are versioned
+    independently of the spot trading API, which is currently v3.3.
+    """
+    return "v3.2"
+
+
 def get_futures_api_version():
     """Get futures api version"""
     return "v2.3"

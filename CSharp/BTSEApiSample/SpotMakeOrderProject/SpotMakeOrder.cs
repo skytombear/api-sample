@@ -17,25 +17,24 @@ public class SpotMakeOrder
         {
             var response = await _httpClient.SendAsync(requestMessage);
 
-            // If the response is not successful, print the error message
+            // If the response is not successful, print the error message and stop
             if (response.IsSuccessStatusCode is false)
             {
                 Console.WriteLine($"Error message: {await response.Content.ReadAsStringAsync()}");
+                return null;
             }
-
-            response.EnsureSuccessStatusCode();
 
             return await response.Content.ReadFromJsonAsync<List<SpotMakeOrderResponseEntity>>();
         }
         catch (HttpRequestException httpErr)
         {
             Console.WriteLine($"HTTP error occurred: {httpErr.Message}");
-            throw;
+            return null;
         }
         catch (Exception err)
         {
             Console.WriteLine($"Other error occurred: {err.Message}");
-            throw;
+            return null;
         }
     }
 

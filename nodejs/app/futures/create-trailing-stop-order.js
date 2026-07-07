@@ -15,6 +15,7 @@ const placeTrailingStopOrder = async ({
   triggerPrice,
   stopPrice,
   trailValue,
+  trailValueType,
   clOrderID,
   trigger,
 }) => {
@@ -32,6 +33,7 @@ const placeTrailingStopOrder = async ({
     triggerPrice,
     stopPrice,
     trailValue,
+    trailValueType,
     clOrderID,
     trigger,
   };
@@ -54,7 +56,8 @@ placeTrailingStopOrder({
   type: 'MARKET',
   txType: 'TRIGGER',
   trigger: 'lastPrice', // markPrice or lastPrice
-  trailValue: 10,
+  trailValue: 0.05, // PERCENTAGE type, valid range [0.001, 0.99]
+  trailValueType: 'PERCENTAGE', // required by the API
 })
   .then(console.log)
   .catch(console.error);
